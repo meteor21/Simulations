@@ -18,7 +18,7 @@ from .agents_collect import select_cohort
 from .agents_sources import download_fec_cycles, import_bias, import_profiles
 from .agents_store import AgentStore
 from .importers import FecAcquisitionError, import_fec_zip, import_funding, import_candidates, import_roster
-from .network import BudgetExceeded, HttpClient
+from .network import AccessBlocked, BudgetExceeded, HttpClient
 from .util import dumps, iso, now, dt
 
 
@@ -169,6 +169,11 @@ def run_pilot(output, *, run_network=False, download_fec=False, funding_db=None,
             priority = [d for pair in zip_longest(national, local) for d in pair if d]
             try:
                 report['source_resolution'] = workflow.sources.resolve(client, token, max_sources=6, max_pages=1, domains=priority)
+                denied = next((r['http_status'] for r in report['source_resolution']
+                               if r.get('http_status') in {401, 403}), None)
+                if denied:
+                    raise AccessBlocked('Media Cloud source lookup denied; collection was not started.',
+                                        http_status=denied, reason='access_denied')
                 report['collection_plan'] = workflow.collector.plan_campaign(
                     cohort, start, as_of, run_label='bounded-pilot', max_initial_jobs=1000)
                 report['run'] = workflow.run(cohort, as_of, run_network=True, token=token,
@@ -182,10 +187,19 @@ def run_pilot(output, *, run_network=False, download_fec=False, funding_db=None,
                 if any(p['status'] in {'blocked_unresolved_source_ids', 'partial_source_resolution', 'no_source_panel'}
                        for p in report['collection_plan']):
                     report['blockers'].append('Source panel incomplete; inspect source_resolution and collection_plan')
+            except AccessBlocked as exc:
+                detail = 'Live operation blocked: AccessBlocked'
+                if exc.http_status is not None:
+                    detail += f' (HTTP {exc.http_status}); verify provider API access'
+                report['blockers'].append(detail)
             except Exception as exc:
                 report['blockers'].append('Live operation stopped: ' + type(exc).__name__)
         report['status'] = 'blocked' if report['blockers'] else ('executed' if run_network else 'offline_prepared')
         report['selected_candidates'] = len(cohort)
+        report['observations'] = {
+            'unique_article_urls': store.rows('SELECT COUNT(*) AS n FROM cs_articles')[0]['n'],
+            'candidate_annotations': store.rows('SELECT COUNT(*) AS n FROM cs_annotations')[0]['n'],
+        }
         report['http_attempts_total'] = ledger.used
         report['http_attempts_this_run'] = ledger.used - report['http_attempts_before']
         report['provider_attempts_sent_this_run'] = client.requests_used
@@ -215,6 +229,19 @@ def main():
     parser.add_argument('--as-of', default='2026-10-06')
     report = run_pilot(**vars(parser.parse_args()))
     print(json.dumps(report, indent=2))
+    if os.environ.get('GITHUB_ACTIONS') == 'true' and report.get('fec_error'):
+        print('::error title=FEC acquisition failed::' + json.dumps(report['fec_error'], sort_keys=True))
+    if os.environ.get('GITHUB_ACTIONS') == 'true':
+        observations = report.get('observations', {})
+        print('::notice title=Bounded pilot result::' + json.dumps({
+            'status': report.get('status'), 'selected_candidates': report.get('selected_candidates', 0),
+            'http_attempts_total': report.get('http_attempts_total', 0),
+            'unique_article_urls': observations.get('unique_article_urls', 0),
+            'candidate_annotations': observations.get('candidate_annotations', 0)}, sort_keys=True))
+        for result in report.get('source_resolution', []):
+            if result.get('http_status') in {401, 403}:
+                print('::error title=Media Cloud access denied::HTTP ' + str(result['http_status']) +
+                      '; source lookup stopped. Verify the provider key and account API access.')
     return 2 if report['blockers'] else 0
 
 

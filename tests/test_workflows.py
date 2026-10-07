@@ -1,5 +1,6 @@
 """Execute the pilot workflow's Python steps, including a runner without deps."""
 import os
+import json
 from pathlib import Path
 import subprocess
 import sys
@@ -65,3 +66,27 @@ def test_credential_preflight_does_not_echo_key(tmp_path):
                                without_dependencies=True, credential=credential)
     assert result.returncode == 0, result.stderr
     assert credential not in result.stdout + result.stderr
+
+
+def test_manual_run_does_not_require_git_request_file(tmp_path, monkeypatch):
+    monkeypatch.setenv('GITHUB_EVENT_NAME', 'workflow_dispatch')
+    result = run_workflow_step('Validate explicit Git run request', tmp_path, without_dependencies=True)
+    assert result.returncode == 0, result.stderr
+
+
+def test_push_without_explicit_request_fails_before_dependencies(tmp_path, monkeypatch):
+    monkeypatch.setenv('GITHUB_EVENT_NAME', 'push')
+    result = run_workflow_step('Validate explicit Git run request', tmp_path, without_dependencies=True)
+    assert result.returncode != 0
+    assert 'no provider requests started' in result.stderr
+
+
+@pytest.mark.parametrize('limit,returncode', [(20, 0), (21, 1)])
+def test_git_run_request_cannot_increase_the_pilot_allowance(tmp_path, monkeypatch, limit, returncode):
+    monkeypatch.setenv('GITHUB_EVENT_NAME', 'push')
+    folder = tmp_path / '.github'
+    folder.mkdir()
+    (folder / 'pilot-request.json').write_text(json.dumps({'format': 'midterm-pilot-request-v1',
+        'candidates': 24, 'max_total_provider_requests': limit}))
+    result = run_workflow_step('Validate explicit Git run request', tmp_path, without_dependencies=True)
+    assert result.returncode == returncode, result.stderr

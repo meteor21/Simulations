@@ -2,6 +2,9 @@ name: Real 24-candidate pilot
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/pilot-request.json]
 
 permissions:
   contents: write
@@ -24,6 +27,23 @@ jobs:
           python-version: "3.12"
           cache: pip
           cache-dependency-path: requirements-dev.lock
+      - name: Validate explicit Git run request
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          if os.environ.get('GITHUB_EVENT_NAME') == 'push':
+              path = Path('.github/pilot-request.json')
+              if not path.is_file():
+                  raise SystemExit('An explicit pilot request file is required; no provider requests started.')
+              request = json.loads(path.read_text())
+              if (request.get('format') != 'midterm-pilot-request-v1'
+                  or request.get('candidates') != 24
+                  or request.get('max_total_provider_requests') != 20):
+                  raise SystemExit('Git run request must preserve the 24-candidate, 20-request pilot policy.')
+              print('Explicit Git request accepted; previously spent requests remain charged.')
+          PY
       - name: Check secure provider credential
         env:
           MEDIACLOUD_API_KEY: ${{ secrets.MEDIACLOUD_API_KEY }}

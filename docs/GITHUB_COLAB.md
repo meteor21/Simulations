@@ -96,7 +96,8 @@ and real bundles distinct, preserve missingness and retain rights/provenance.
 
 ## Real pilot on GitHub Actions
 
-The separate **Real 24-candidate pilot** workflow is manual-only. Add
+The separate **Real 24-candidate pilot** workflow accepts a manual run or an explicit
+Git run request. Add
 `MEDIACLOUD_API_KEY` to repository **Settings → Secrets and variables → Actions**,
 then open **Actions → Real 24-candidate pilot → Run workflow** on `main`.
 The key is supplied to credential preflight and collection through the Actions secret binding.
@@ -123,9 +124,21 @@ with useful outputs; inspect `pilot_report.json` rather than treating failure as
 For FEC failures, inspect `fec_error` in that report for the sanitized stage,
 reason and HTTP status or parser row/field count when available. Normal HTTPS
 redirects within the official FEC domain consume a separate reservation for each
-hop. Redirects outside that boundary remain blocked. Acquisition failure is not
+hop. The exact government AWS bucket and requested candidate ZIP path documented
+in FEC's official production proxy are also permitted; other destinations remain
+blocked. Acquisition failure is not
 proof of no candidates. A malformed import must not leave a partially committed
 roster that a later run could mistake for a completed registry.
+
+For an already authorized live run when the dispatch API is unavailable, commit a
+new request ID to `.github/pilot-request.json` on `main`. Only changes to that path
+trigger collection on a push; ordinary code/documentation commits do not. Its
+format is `midterm-pilot-request-v1`, `candidates` is 24, and
+`max_total_provider_requests` is 20. This records an explicit request, never a new
+quota: all previously charged attempts remain consumed on `midterm-pilot-budget`.
+Do not change this file without authorization to run the live pilot. There is no
+scheduled collection. GitHub annotations show safe FEC errors and result counts;
+HTTP 401/403 stops source resolution and collection before further denied requests.
 
 GitHub runners are temporary, so the request counter is committed **before every
 provider attempt** to the separate `midterm-pilot-budget` branch. That branch holds

@@ -9,7 +9,11 @@ import requests
 from urllib3.util.retry import Retry
 
 class BudgetExceeded(RuntimeError): pass
-class AccessBlocked(RuntimeError): pass
+class AccessBlocked(RuntimeError):
+    def __init__(self, message, *, http_status=None, reason=None):
+        super().__init__(message)
+        self.http_status = http_status
+        self.reason = reason
 
 class HttpClient:
     """Bounded, sequential HTTP. API-level pacing is intentional; no parallel quota evasion."""
@@ -44,17 +48,20 @@ class HttpClient:
                         try: delay=max(delay,(email.utils.parsedate_to_datetime(raw)-datetime.now(timezone.utc)).total_seconds())
                         except (TypeError,ValueError): pass
                     r.close()
-                    if delay>120 or attempt==2: raise AccessBlocked('Server requested a pause or remained unavailable; job is resumable.')
+                    if delay>120 or attempt==2: raise AccessBlocked('Server requested a pause or remained unavailable; job is resumable.',
+                        http_status=r.status_code, reason='retry_limited')
                     time.sleep(delay); continue
                 if r.status_code in (401,403):
-                    r.close(); raise AccessBlocked(f'Access denied ({r.status_code}) for {domain}; no bypass attempted.')
+                    r.close(); raise AccessBlocked(f'Access denied ({r.status_code}) for {domain}; no bypass attempted.',
+                        http_status=r.status_code, reason='access_denied')
                 # Return redirects to caller; article redirects require another allowlist check.
                 if 300<=r.status_code<400:
                     r._content=b''; r.close(); return r
                 if r.status_code==404:
                     r._content=b''; r.close(); return r
                 if r.status_code >= 400:
-                    code=r.status_code; r.close(); raise AccessBlocked(f'HTTP {code} from {domain}.')
+                    code=r.status_code; r.close(); raise AccessBlocked(f'HTTP {code} from {domain}.',
+                        http_status=code, reason='http_error')
                 body=bytearray()
                 for chunk in r.iter_content(65536):
                     body.extend(chunk)

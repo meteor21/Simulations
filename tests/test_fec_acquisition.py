@@ -8,10 +8,10 @@ from types import SimpleNamespace
 import pytest
 import requests
 
-from charisma_lab.agents_sources import download_fec_cycles
+from charisma_lab.agents_sources import download_fec_cycles, SourceAgent, FEC_BULK_HOST
 from charisma_lab.agents_store import AgentStore
 from charisma_lab.importers import FecAcquisitionError, import_fec_zip
-from charisma_lab.network import BudgetExceeded, HttpClient
+from charisma_lab.network import BudgetExceeded, HttpClient, AccessBlocked
 from charisma_lab.pilot import RequestLedger
 
 
@@ -165,3 +165,57 @@ def test_invalid_zip_diagnostics_do_not_leak_archive_contents(tmp_path):
         with pytest.raises(FecAcquisitionError) as caught: import_fec_zip(store,path,2026)
         assert caught.value.details=={'stage':'archive','reason':'invalid_or_unsupported_zip','cycle':2026}
         assert 'SECRET' not in str(caught.value)
+
+
+def test_official_production_bulk_object_charges_both_hops(tmp_path,monkeypatch):
+    monkeypatch.setattr('charisma_lab.network.time.sleep',lambda _:None)
+    target=f'https://{FEC_BULK_HOST}/bulk-downloads/2026/cn26.zip'
+    session=Session(response(302,headers={'Location':target}),response(200,archive(record())))
+    with AgentStore(tmp_path/'pilot.sqlite') as store:
+        ledger=RequestLedger(store)
+        client=HttpClient(max_requests=20,session=session,before_request=ledger.reserve)
+        result=download_fec_cycles(store,client,[2026],tmp_path/'cache')
+        assert result[0]['imported_rows']==1
+        assert ledger.used==client.requests_used==len(session.calls)==2
+        assert session.calls[1][0]==target
+
+
+@pytest.mark.parametrize('target',[
+    f'https://{FEC_BULK_HOST}.attacker.example/bulk-downloads/2026/cn26.zip',
+    'https://different-bucket.s3-us-gov-west-1.amazonaws.com/bulk-downloads/2026/cn26.zip',
+    f'https://{FEC_BULK_HOST}/bulk-downloads/2024/cn24.zip',
+    f'https://{FEC_BULK_HOST}/bulk-downloads/2026/cn24.zip',
+    f'https://{FEC_BULK_HOST}/other/2026/cn26.zip',
+    f'https://{FEC_BULK_HOST}/bulk-downloads/2026/../2026/cn26.zip',
+    f'https://{FEC_BULK_HOST}/bulk-downloads/2026/cn26.zip?secret=hidden',
+    f'https://{FEC_BULK_HOST}/bulk-downloads/2026/cn26.zip#fragment',
+    f'https://user:secret@{FEC_BULK_HOST}/bulk-downloads/2026/cn26.zip',
+    f'http://{FEC_BULK_HOST}/bulk-downloads/2026/cn26.zip',
+])
+def test_production_bulk_redirect_is_exact_and_does_not_broaden_aws_access(tmp_path,target):
+    session=Session(response(302,headers={'Location':target}))
+    with AgentStore(tmp_path/'pilot.sqlite') as store:
+        with pytest.raises(FecAcquisitionError) as caught:
+            download_fec_cycles(store,HttpClient(session=session),[2026],tmp_path/'cache')
+        assert caught.value.details['reason']=='redirect_not_permitted'
+        assert len(session.calls)==1
+        assert 'hidden' not in str(caught.value)+json.dumps(caught.value.details)
+
+
+@pytest.mark.parametrize('status',[401,403])
+def test_source_resolution_stops_after_access_denial_without_logging_secret(tmp_path,status):
+    calls=[]
+    def denied(*args,**kwargs):
+        calls.append(1)
+        error=AccessBlocked('SECRET must never appear in reports')
+        error.http_status=status
+        raise error
+    with AgentStore(tmp_path/'pilot.sqlite') as store:
+        for domain in ['one.example','two.example','three.example']:
+            store.con.execute('INSERT INTO cs_outlets(domain,name) VALUES(?,?)',(domain,domain))
+        store.con.commit()
+        result=SourceAgent(store).resolve(SimpleNamespace(get=denied),'fixture-only-secret',max_sources=3)
+        assert len(calls)==len(result)==1
+        assert result[0]['http_status']==status and result[0]['status']=='error'
+        assert 'SECRET' not in json.dumps(result)
+        assert 'SECRET' not in json.dumps(store.rows('SELECT details_json FROM sa_events'))

@@ -112,6 +112,50 @@ def test_fec_failure_report_has_safe_actionable_diagnostics(tmp_path, monkeypatc
     assert 'FEC acquisition failed: download/http_status' in report['blockers']
 
 
+def test_github_fec_failure_is_visible_in_annotations(tmp_path, monkeypatch, capsys):
+    from charisma_lab.pilot import main
+    monkeypatch.setenv('GITHUB_ACTIONS', 'true')
+    monkeypatch.setattr('sys.argv', ['pilot', '--output', str(tmp_path)])
+    monkeypatch.setattr('charisma_lab.pilot.run_pilot', lambda **kwargs: {
+        'blockers': ['FEC unavailable'],
+        'fec_error': {'stage': 'download', 'reason': 'http_status', 'http_status': 404}})
+    assert main() == 2
+    assert '::error title=FEC acquisition failed::' in capsys.readouterr().out
+
+
+@pytest.mark.parametrize('status', [401, 403])
+def test_http_access_denial_preserves_status_without_retrying(status):
+    from charisma_lab.network import AccessBlocked
+    class Session:
+        headers = {}
+        def get(self, *args, **kwargs):
+            return SimpleNamespace(status_code=status, headers={}, close=lambda: None)
+    client = HttpClient(session=Session(), interval=0)
+    with pytest.raises(AccessBlocked) as error:
+        client.get('https://provider.example/fixture')
+    assert error.value.http_status == status
+    assert error.value.reason == 'access_denied'
+    assert client.requests_used == 1
+
+
+@pytest.mark.parametrize('status', [401, 403])
+def test_source_access_denial_prevents_candidate_collection(tmp_path, monkeypatch, status):
+    from charisma_lab.agents import SentimentWorkflow
+    monkeypatch.setenv('MEDIACLOUD_API_KEY', 'nonsecret-test-fixture')
+    monkeypatch.setattr('charisma_lab.agents_sources.SourceAgent.resolve', lambda *args, **kwargs: [
+        {'domain': 'news.example', 'status': 'error', 'error_type': 'AccessBlocked', 'http_status': status}])
+    monkeypatch.setattr(SentimentWorkflow, 'run', lambda *args, **kwargs: pytest.fail('Access denial must stop collection'))
+    output = tmp_path / 'out'
+    output.mkdir()
+    with AgentStore(output / 'pilot.sqlite') as store:
+        seed(store)
+    report = run_pilot(output, run_network=True)
+    assert report['status'] == 'blocked'
+    assert report['selected_candidates'] == 24
+    assert report['http_attempts_total'] == 0
+    assert any(f'HTTP {status}' in blocker for blocker in report['blockers'])
+
+
 def test_insufficient_cohort_blocks_provider_with_credential(tmp_path, monkeypatch):
     monkeypatch.setenv('MEDIACLOUD_API_KEY', 'fixture-secret-not-real')
     monkeypatch.setattr(HttpClient, 'get', lambda *a, **kw: pytest.fail('No provider request permitted'))

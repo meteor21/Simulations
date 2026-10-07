@@ -11,6 +11,11 @@ from .importers import read_csv, require, FecAcquisitionError
 from .network import BudgetExceeded, AccessBlocked
 from .util import now, iso, host, dumps, digest, dt
 
+# FEC's exact production bulk-download target, verified from its public proxy:
+# https://github.com/fecgov/fec-proxy/blob/42a867c3c0fc6d86584f024f09ec990d725a022c/manifest_prod.yml#L23
+# https://github.com/fecgov/fec-proxy/blob/42a867c3c0fc6d86584f024f09ec990d725a022c/nginx.conf#L70-L71
+FEC_BULK_HOST='cg-519a459a-0ea3-42c2-b7bc-fa1143481f74.s3-us-gov-west-1.amazonaws.com'
+
 
 def import_profiles(store, path):
     n=0
@@ -180,6 +185,12 @@ class SourceAgent:
                 report.append({'domain':outlet['domain'],'source_id':sid,'status':status})
             except BudgetExceeded:
                 report.append({'domain':outlet['domain'],'status':'budget_stop'}); break
+            except AccessBlocked as exc:
+                error={'domain':outlet['domain'],'status':'error','error_type':type(exc).__name__}
+                status=getattr(exc,'http_status',None)
+                if type(status) is int: error['http_status']=status
+                report.append(error)
+                if status in {401,403}: break  # No repeated lookups with denied credentials/access.
             except Exception as exc:
                 report.append({'domain':outlet['domain'],'status':'error','error_type':type(exc).__name__})
         self.store.event(self.name,'resolve_sources',report=report); return report
@@ -227,8 +238,9 @@ def download_fec_cycles(store,client,cycles,cache_dir):
                     raise FecAcquisitionError('download','redirect_loop',cycle=year)
                 visited.add(current)
                 try: response=client.get(current,min_interval=2,max_bytes=50_000_000)
-                except AccessBlocked:
-                    raise FecAcquisitionError('download','access_or_transport_blocked',cycle=year) from None
+                except AccessBlocked as exc:
+                    raise FecAcquisitionError('download','access_or_transport_blocked',cycle=year,
+                        http_status=getattr(exc,'http_status',None)) from None
                 if response.status_code in {301,302,303,307,308}:
                     location=response.headers.get('Location')
                     if not location:
@@ -236,7 +248,10 @@ def download_fec_cycles(store,client,cycles,cache_dir):
                     target=urljoin(current,location)
                     try:
                         parsed=urlsplit(target)
-                        permitted=(parsed.scheme=='https' and parsed.hostname in {'www.fec.gov','fec.gov'}
+                        official_origin=parsed.hostname in {'www.fec.gov','fec.gov'}
+                        verified_bulk_object=(parsed.hostname==FEC_BULK_HOST
+                            and parsed.path==f'/bulk-downloads/{year}/cn{year%100:02d}.zip')
+                        permitted=(parsed.scheme=='https' and (official_origin or verified_bulk_object)
                             and not parsed.username and not parsed.password and parsed.port in {None,443}
                             and not parsed.query and not parsed.fragment)
                     except ValueError: permitted=False

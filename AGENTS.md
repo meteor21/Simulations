@@ -114,3 +114,18 @@ verified as 1/20 used; preserve that counter and remaining 19 attempts. This is 
 evidence of a valid Media Cloud response or completed real sentiment analysis.
 Inspect the structured `fec_error` in `pilot_report.json` on the next updated run;
 do not guess that a download, redirect or parser failure means an empty electorate.
+
+Latest run `37560296917` confirmed `download/redirect_not_permitted`, HTTP 302,
+and 2/20 requests spent. FEC's immutable production proxy configuration at commit
+`42a867c3c0fc6d86584f024f09ec990d725a022c` documents its exact government AWS
+bucket; permit only that host and the requested `/bulk-downloads/YYYY/cnYY.zip`.
+Do not allow arbitrary AWS hosts or switch providers to evade access restrictions.
+HTTP 401/403 now stops source lookup and collection; diagnostics retain safe status.
+The original 2026/as-of policy and durable request quota stay unchanged.
+
+The user authorized real analysis on GitHub. When its dispatch API is blocked, an
+explicit `.github/pilot-request.json` change on `main` can start this same bounded
+workflow using the repository secret. Only edit that file to request an authorized
+live run; ordinary pushes must not trigger collection. Manual dispatch remains
+available. Never create a new quota through the request file. Keep summaries of
+observed articles/annotations separate from a claim of validated sentiment.

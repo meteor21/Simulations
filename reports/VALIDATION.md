@@ -10,7 +10,7 @@ No earlier pass claim was accepted without rerunning its checks.
 |---|---|---|
 | Original recovered Python package | 116 passed, 0 failed, 0 skipped | `baseline_tests.xml`, `baseline_tests.log` |
 | Original offline notebook defaults | 13 code cells / 25 total, all executed in order in a shared Python namespace | `baseline_notebook.json` |
-| Corrected integrated suite | **217 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
+| Corrected integrated suite | **239 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
 | Three-worker synthetic demonstration | Both invented candidates: national 80, local 20, media recency 50, in-office true | `agents_demo.json` |
 | Legacy synthetic offline demonstration | SYN-A standing 76.889029 → 51.081959; SYN-B stays missing | `offline_demo.log` |
 | Corrected notebook defaults | **14/14 code cells**, fresh Jupyter kernel, no errors, zero network attempts | `notebook_execution.json`, `notebook_validation.log` |
@@ -21,7 +21,7 @@ No earlier pass claim was accepted without rerunning its checks.
 | Pilot preflight | Exit 2 with explicit missing registry; 0 selected real candidates, **0 HTTP attempts** | `pilot_preflight.log`, `pilot/pilot_report.json` |
 | Live provider, publisher scrape, downloaded neural inference, Colab Drive | **Not run / not validated** | Missing prerequisites and optional scope below |
 
-The new total includes 101 added regression cases. Existing assertions were not
+The new total includes 123 added regression cases. Existing assertions were not
 silently disabled: the old expectation permitting writes into unrelated databases
 was corrected to require refusal, and the old blanket-surname masking assertion
 was corrected to preserve a rival's identity. Synthetic annotation helpers now
@@ -184,3 +184,53 @@ notebook execution and actual bundle import each executed all 14 code cells with
 zero errors and network attempts after regeneration; the bundle import report is
 `artifacts/notebook_bundle_import.json`. The original live report remains a failed
 acquisition attempt, not a completed real-data validation.
+
+## Verified FEC production redirect — October 7 follow-up
+
+Run `37560296917` on `5ce0903` failed after installation succeeded. The supplied
+log identifies `download/redirect_not_permitted`, HTTP 302, zero selected candidates,
+and two cumulative provider attempts. Read-only Git budget inspection confirmed
+`used=2`. This establishes a redirect allowlist failure; the prior same-domain
+exception did not cover FEC's production download host.
+
+FEC's [production manifest](https://github.com/fecgov/fec-proxy/blob/42a867c3c0fc6d86584f024f09ec990d725a022c/manifest_prod.yml#L23)
+and [rewrite rule](https://github.com/fecgov/fec-proxy/blob/42a867c3c0fc6d86584f024f09ec990d725a022c/nginx.conf#L70-L71)
+name the exact government AWS bucket and `/bulk-downloads/` object path. The downloader
+now permits that exact host only for the requested cycle's candidate ZIP. HTTPS,
+TLS verification, no credentials/query/fragment, the hop limit, and a separate
+durable reservation per request remain enforced. Spoofed buckets, other years,
+other files and unsafe locations are rejected before the second request.
+
+HTTP denial exceptions retain safe numeric status. Media Cloud source lookup
+stops after 401/403; candidate collection cannot start after that denial. No
+response bodies or exception text enter those diagnostics. GitHub annotations
+publish the sanitized FEC failure and selected-candidate/article/annotation counts.
+
+The user already authorized real analysis on GitHub. The workflow additionally
+accepts an explicit `.github/pilot-request.json` change on `main` when the dispatch
+API is unavailable. Its standard-library preflight requires the existing
+24-candidate/20-request policy. Ordinary code pushes do not start collection, and
+the marker neither resets nor expands the durable quota. The first marker is
+committed separately after code validation to start the authorized bounded run.
+
+Actual commands/results before starting that run:
+
+```bash
+/workspace/.venvs/midterm-sentiment/bin/python -m pytest tests/test_fec_acquisition.py tests/test_pilot.py tests/test_workflows.py
+# 58 passed: includes 13 new CDN/source cases and 9 control/diagnostic cases.
+/workspace/.venvs/midterm-sentiment/bin/python -m pytest --junitxml=reports/test_results.xml
+# 239 passed; original exit status retained with output in test_results.log.
+/workspace/.venvs/midterm-sentiment/bin/python scripts/sync_notebook.py
+/workspace/.venvs/midterm-sentiment/bin/python scripts/sync_notebook.py --check
+/workspace/.venvs/midterm-sentiment/bin/python scripts/validate_notebook.py
+```
+
+Read-only upstream software checks also confirm Media Cloud's source-directory
+domain lookup, authentication, pagination and story fields. Its
+[source filter](https://github.com/mediacloud/web-search/blob/b1db72f07b8a3dc0c334bbfa7324d560fc032967/mcweb/backend/sources/api.py#L415-L445)
+searches names, labels and alternative domains. The search adapter sends an ignored
+`platform` parameter where GET expects `p`; the current default selects the same
+Media Cloud provider, so it is not the cause of this failure. These software-source
+checks made no FEC or Media Cloud data-provider requests and do not validate the
+user's provider account or real sentiment accuracy. Real run outcomes must be
+reported separately from these passing offline checks.
