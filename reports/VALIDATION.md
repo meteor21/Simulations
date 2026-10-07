@@ -10,7 +10,7 @@ No earlier pass claim was accepted without rerunning its checks.
 |---|---|---|
 | Original recovered Python package | 116 passed, 0 failed, 0 skipped | `baseline_tests.xml`, `baseline_tests.log` |
 | Original offline notebook defaults | 13 code cells / 25 total, all executed in order in a shared Python namespace | `baseline_notebook.json` |
-| Corrected integrated suite | **265 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
+| Corrected integrated suite | **267 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
 | Three-worker synthetic demonstration | Both invented candidates: national 80, local 20, media recency 50, in-office true | `agents_demo.json` |
 | Legacy synthetic offline demonstration | SYN-A standing 76.889029 → 51.081959; SYN-B stays missing | `offline_demo.log` |
 | Corrected notebook defaults | **14/14 code cells**, fresh Jupyter kernel, no errors, zero network attempts | `notebook_execution.json`, `notebook_validation.log` |
@@ -20,9 +20,10 @@ No earlier pass claim was accepted without rerunning its checks.
 | Source ratings | 6 attributed, dated snapshots; unknown/current-vs-historical distinctions retained | Executed seed and provenance tests |
 | Pilot preflight | Exit 2 with explicit missing registry; 0 selected real candidates, **0 HTTP attempts** | `pilot_preflight.log`, `pilot/pilot_report.json` |
 | Bounded real FEC/Media Cloud collection | 24 registrations, 3 unique news URLs, 0 annotations; blocked/partial completeness; **16/20 cumulative attempts** | [Run 37680664034](https://github.com/meteor21/Simulations/actions/runs/37680664034), Git budget branch |
+| Retained real checkpoint analysis and notebook import | **Success**; 24 registrations, 3 URLs, 0 reviews; `analyzed_partial`, **0 new provider calls** | [Run 37683585456](https://github.com/meteor21/Simulations/actions/runs/37683585456), `live_pilot_result.json` |
 | Publisher scrape, downloaded neural inference, Colab Drive | **Not run / not validated** | Optional scope; reviewed labels remain missing |
 
-The new total includes 149 added regression cases. Existing assertions were not
+The new total includes 151 added regression cases. Existing assertions were not
 silently disabled: the old expectation permitting writes into unrelated databases
 was corrected to require refusal, and the old blanket-surname masking assertion
 was corrected to preserve a rival's identity. Synthetic annotation helpers now
@@ -265,7 +266,7 @@ Actual local verification:
 
 ```bash
 /workspace/.venvs/midterm-sentiment/bin/python -m pytest --junitxml=reports/test_results.xml > reports/test_results.log 2>&1
-# 265 passed in 2.75s; no failures/errors/skips.
+# Latest: 267 passed in 2.76s; no failures/errors/skips.
 /workspace/.venvs/midterm-sentiment/bin/python scripts/sync_notebook.py
 /workspace/.venvs/midterm-sentiment/bin/python scripts/sync_notebook.py --check
 /workspace/.venvs/midterm-sentiment/bin/python scripts/validate_notebook.py
@@ -279,4 +280,20 @@ ledger/policy, original-run matching, bounded sizes, symlink rejection, refusal 
 overwrite existing databases/bundles, missing artifact failure, preservation of
 original blockers and separate collection/analysis code provenance. They do not
 substitute for analysis of the real retained run. Its verified outcome is recorded
-separately in `LIVE_PILOT_RUN.md` when the GitHub job completes.
+separately in `LIVE_PILOT_RUN.md`.
+
+The retained-checkpoint job **succeeded** in 41 seconds on code/request commit
+`663a6c6`; concurrent [offline CI 37683584925](https://github.com/meteor21/Simulations/actions/runs/37683584925)
+also succeeded. The original collection report's sole blocker was incomplete source
+panels, with **six processed search jobs, three hits, zero blocked jobs and zero errors**.
+AP, CNN and Fox root domains resolved; Alaska Beacon, Alabama Reflector and Arkansas
+Advocate did not match the provider directory. Unknown coverage remains missing;
+an outlet's absence from that lookup is not proof of no published campaign coverage.
+
+This evidence confirmed a status-handling defect: successful bounded searches were
+returned as a fatal error solely because the full source panel was unresolved.
+Such runs now report `executed_partial` with warnings, including missing reviewed
+labels. Two new transport-free regressions verify partial-panel success and that
+actual failed jobs still block. Authentication/acquisition errors and quota limits
+remain enforced. No additional collection run was launched to test this correction;
+the existing real checkpoint and original report are retained unchanged.

@@ -83,7 +83,9 @@ rosters. The user subsequently configured the GitHub repository Actions secret.
 Run `37680664034` now holds 24 real FEC registrations and 3 unique news URLs, with
 zero sentiment annotations. These registrations are discovery records, not verified
 contestants. The collection reported blocked/partial completeness; inspect its saved
-report before resuming. The durable Git budget is **16/20 used**, leaving four
+report before resuming. Its only blocker was incomplete source coverage: the six
+search jobs all finished with zero blocked/error jobs. Saved-checkpoint analysis
+`37683585456` and real notebook import succeeded. The durable Git budget is **16/20 used**, leaving four
 attempts. Do not spend them merely to retry an unchanged failure or reset the quota.
 
 ## GitHub and Colab handoff
@@ -115,7 +117,7 @@ job keeps the old workflow revision. Do not copy the Actions secret to code or c
 The user subsequently configured the repository Actions secret. A retry of run
 `37558917645` passed credential presence and attempted FEC acquisition, but failed
 with generic `ValueError` before selecting any candidates. The remote budget was
-verified as 1/20 used; preserve that counter and remaining 19 attempts. This is not
+verified as 1/20 used at that time; the current 16/20 state above supersedes it. This is not
 evidence of a valid Media Cloud response or completed real sentiment analysis.
 Inspect the structured `fec_error` in `pilot_report.json` on the next updated run;
 do not guess that a download, redirect or parser failure means an empty electorate.
@@ -155,3 +157,9 @@ are refused. `--analyze-existing` requires the original ledger/policy and cannot
 collect or import new inputs; its HTTP count must remain unchanged. Preserve missing
 scores when reviews or coverage are absent. Results are `dataset_kind=real`, while
 the default notebook demonstration remains explicitly synthetic.
+
+Source-panel incompleteness after successfully completed searches is now a warning
+and `executed_partial`, not a fatal collection error. Zero reviewed labels also
+remains explicit. Failed/blocked jobs, access denial, invalid input and exhausted
+quota still block. Do not rerun live collection merely to obtain a green status;
+use the zero-request checkpoint analysis for partial saved data.

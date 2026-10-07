@@ -181,6 +181,28 @@ def test_checkpoint_analysis_preserves_counter_and_missing_sentiment_without_net
     assert (output / 'exports/candidate_sentiment_summary.csv').is_file()
 
 
+@pytest.mark.parametrize('failed_jobs,expected_status', [(0, 'executed_partial'), (1, 'blocked')])
+def test_incomplete_panel_warns_but_actual_failed_jobs_still_block(tmp_path, monkeypatch, failed_jobs, expected_status):
+    from charisma_lab.agents import SentimentWorkflow
+    monkeypatch.setenv('MEDIACLOUD_API_KEY', 'nonsecret-test-fixture')
+    monkeypatch.setattr(HttpClient, 'get', lambda *args, **kwargs: pytest.fail('Synthetic fixture must not use network'))
+    monkeypatch.setattr('charisma_lab.agents_sources.SourceAgent.resolve', lambda *args, **kwargs: [
+        {'domain': 'synthetic.example', 'status': 'not_found', 'http_status': None}])
+    monkeypatch.setattr(SentimentWorkflow, 'run', lambda *args, **kwargs: {
+        'collection': {'processed': 6, 'processed_hits': 3, 'blocked': 0, 'errors': failed_jobs}})
+    output = tmp_path / 'out'
+    output.mkdir()
+    with AgentStore(output / 'pilot.sqlite') as store:
+        seed(store)
+    report = run_pilot(output, run_network=True)
+    assert report['status'] == expected_status
+    assert any('Source panel incomplete' in warning for warning in report['warnings'])
+    assert any('scores remain missing' in warning for warning in report['warnings'])
+    assert report['observations']['reviewed_annotations'] == 0
+    assert bool(report['blockers']) == bool(failed_jobs)
+    assert report['http_attempts_total'] == 0
+
+
 def test_checkpoint_analysis_cannot_create_a_new_database_or_quota(tmp_path):
     output = tmp_path / 'missing'
     with pytest.raises(ValueError, match='already initialized'):

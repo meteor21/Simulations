@@ -1,0 +1,104 @@
+{
+  "evidence_method": "Public GitHub job annotations plus retained-artifact analysis on GitHub; no local artifact download is claimed.",
+  "collection_run": "https://github.com/meteor21/Simulations/actions/runs/37680664034",
+  "analysis_run": "https://github.com/meteor21/Simulations/actions/runs/37683585456",
+  "analysis_job": "https://github.com/meteor21/Simulations/actions/runs/37683585456/job/113005558978",
+  "offline_ci": "https://github.com/meteor21/Simulations/actions/runs/37683584925",
+  "analysis_workflow_status": "success",
+  "offline_ci_status": "success",
+  "analysis_commit": "663a6c6",
+  "notebook_code_cells": 14,
+  "notebook_real_bundle_import": "passed in GitHub analysis workflow with network denied",
+  "artifact_name": "midterm-real-analysis-37683585456",
+  "artifact_contains": [
+    "real-analysis.zip",
+    "analysis_report.json",
+    "real_notebook_import.json"
+  ],
+  "public_notices": [
+    {
+      "bundle_created": true,
+      "http_attempts_total": 16,
+      "provider_requests_made": 0,
+      "reviewed_annotations": 0,
+      "selected_candidates": 24,
+      "source_run_id": 37680664034,
+      "status": "analyzed_partial",
+      "unique_article_urls": 3
+    },
+    {
+      "status": "blocked",
+      "blockers": [
+        "Source panel incomplete; inspect source_resolution and collection_plan"
+      ],
+      "source_resolution": [
+        {
+          "domain": "apnews.com",
+          "status": "exact_root_homepage_match",
+          "error_type": null,
+          "http_status": null,
+          "source_id": 106145
+        },
+        {
+          "domain": "alaskabeacon.com",
+          "status": "not_found",
+          "error_type": null,
+          "http_status": null,
+          "source_id": null
+        },
+        {
+          "domain": "cnn.com",
+          "status": "exact_root_homepage_match",
+          "error_type": null,
+          "http_status": null,
+          "source_id": 1095
+        },
+        {
+          "domain": "alabamareflector.com",
+          "status": "not_found",
+          "error_type": null,
+          "http_status": null,
+          "source_id": null
+        },
+        {
+          "domain": "foxnews.com",
+          "status": "exact_root_homepage_match",
+          "error_type": null,
+          "http_status": null,
+          "source_id": 1092
+        },
+        {
+          "domain": "arkansasadvocate.com",
+          "status": "not_found",
+          "error_type": null,
+          "http_status": null,
+          "source_id": null
+        }
+      ],
+      "collection": {
+        "processed": 6,
+        "processed_hits": 3,
+        "split": 0,
+        "blocked": 0,
+        "errors": 0
+      },
+      "queue": [
+        {
+          "provider": "mediacloud",
+          "status": "done",
+          "jobs": 6
+        }
+      ],
+      "http_attempts_total": 16,
+      "github_requests_reserved": 16,
+      "selected_candidates": 24
+    }
+  ],
+  "request_budget": {
+    "limit": 20,
+    "used": 16,
+    "remaining": 4
+  },
+  "roster_status": "FEC registration discovery only; not verified contestants",
+  "sentiment_validation": "Not performed: zero reviewed candidate-specific annotations; missing scores preserved"
+}

@@ -139,7 +139,7 @@ def run_pilot(output, *, run_network=False, download_fec=False, funding_db=None,
         report = {'started_at': now(), 'network_requested': run_network,
                   'credential_present': bool(token), 'http_attempts_before': ledger.used,
                   'provider': 'mediacloud', 'limits': {'candidates': 24, 'total_requests': 20},
-                  'blockers': []}
+                  'blockers': [], 'warnings': []}
         if github_budget:
             from .github_budget import GitRequestBudget
             remote_budget = GitRequestBudget(root, policy=policy)
@@ -194,7 +194,7 @@ def run_pilot(output, *, run_network=False, download_fec=False, funding_db=None,
                     report['blockers'].append('Persistent 20-request allowance reached; no further requests permitted for this pilot')
                 if any(p['status'] in {'blocked_unresolved_source_ids', 'partial_source_resolution', 'no_source_panel'}
                        for p in report['collection_plan']):
-                    report['blockers'].append('Source panel incomplete; inspect source_resolution and collection_plan')
+                    report['warnings'].append('Source panel incomplete; inspect source_resolution and collection_plan')
             except AccessBlocked as exc:
                 detail = 'Live operation blocked: AccessBlocked'
                 if exc.http_status is not None:
@@ -202,13 +202,17 @@ def run_pilot(output, *, run_network=False, download_fec=False, funding_db=None,
                 report['blockers'].append(detail)
             except Exception as exc:
                 report['blockers'].append('Live operation stopped: ' + type(exc).__name__)
-        report['status'] = 'blocked' if report['blockers'] else ('executed' if run_network else 'offline_prepared')
         report['selected_candidates'] = len(cohort)
         report['observations'] = {
             'unique_article_urls': store.rows('SELECT COUNT(*) AS n FROM cs_articles')[0]['n'],
             'candidate_annotations': store.rows('SELECT COUNT(*) AS n FROM cs_annotations')[0]['n'],
             'reviewed_annotations': store.rows('SELECT COUNT(*) AS n FROM cs_annotations WHERE reviewed=1')[0]['n'],
         }
+        if run_network and report.get('run') and not report['observations']['reviewed_annotations']:
+            report['warnings'].append('No reviewed candidate-specific sentiment annotations; scores remain missing')
+        report['status'] = ('blocked' if report['blockers'] else
+                            ('executed_partial' if report['warnings'] else 'executed') if run_network
+                            else 'offline_prepared')
         if analyze_existing and not report['blockers']:
             report['run'] = SentimentWorkflow(store).run(cohort, as_of, run_network=False,
                 feature_config=FeatureConfig(mode='retrospective', reviewed_only=True))

@@ -123,6 +123,8 @@ sentiment values or run a paid model. Newly discovered headlines alone are not a
 validated candidate-sentiment analysis; reviewed labels or an explicitly validated
 annotation method are still needed. Partial collection can produce a failed job
 with useful outputs; inspect `pilot_report.json` rather than treating failure as zero news.
+Successfully completed searches with an incomplete source panel now return
+`executed_partial` with warnings. Access denial and failed collection jobs still fail.
 
 For FEC failures, inspect `fec_error` in that report for the sanitized stage,
 reason and HTTP status or parser row/field count when available. Normal HTTPS
@@ -180,6 +182,10 @@ For authorized analysis when dispatch is unavailable, change
 Changing this file never triggers the live-collection workflow.
 
 Download `midterm-real-analysis-<analysis-run-id>` from the successful analysis run.
+The first verified real-data analysis is
+[run 37683585456](https://github.com/meteor21/Simulations/actions/runs/37683585456):
+24 registrations, 3 URLs, zero reviewed labels, all 14 notebook code cells executed
+including actual bundle import. It made zero provider calls; the budget stayed 16/20.
 Import its ZIP, or the inner `real-analysis.zip`, using the notebook's last cell.
 The roster is `RESULTS_TABLES['pilot/selected_congressional_cohort.csv']`; the
 feature table is `RESULTS_TABLES['agents/candidate_sentiment_summary.csv']`.
