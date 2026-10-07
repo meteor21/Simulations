@@ -8,7 +8,16 @@ import zipfile
 from contextlib import closing
 from pathlib import Path
 from .store import Store, read_only
-from .util import digest, dumps, finite_number, iso, now
+from .util import digest, dumps, finite_number, iso, now, normal
+
+
+class FecAcquisitionError(ValueError):
+    """Safe structured FEC diagnostics without response bodies, URLs, or row data."""
+    def __init__(self, stage, reason, *, cycle=None, http_status=None, row=None, field_count=None):
+        self.details={'stage':stage,'reason':reason}
+        for key,value in [('cycle',cycle),('http_status',http_status),('row',row),('field_count',field_count)]:
+            if value is not None: self.details[key]=int(value)
+        super().__init__(f'FEC acquisition failed: {stage}/{reason}')
 
 
 def display_name(name: str) -> str:
@@ -57,30 +66,44 @@ def import_funding(store: Store, path: str | Path, cycles=None) -> int:
 
 
 def import_fec_zip(store: Store, path, cycle: int) -> int:
-    """Read FEC candidate-master ZIP, excluding addresses. IDs are office-specific, not person IDs."""
+    """Atomically read candidate-master ZIP; registrations are not verified contestants."""
     if cycle % 2 or not 1976 <= cycle <= 2100:
         raise ValueError('Supply an even FEC finance-cycle year.')
     source = f'https://www.fec.gov/files/bulk-downloads/{cycle}/cn{cycle % 100:02d}.zip'
     retrieved = now()
     n = 0
-    with zipfile.ZipFile(path) as z:
-        members = [i for i in z.infolist() if Path(i.filename).name.lower() == 'cn.txt']
-        if len(members) != 1 or members[0].file_size > 300_000_000:
-            raise ValueError('Expected one reasonably sized cn.txt in the official ZIP.')
-        with z.open(members[0]) as raw, io.TextIOWrapper(raw,encoding='utf-8-sig',errors='replace') as text:
-            for r in csv.reader(text,delimiter='|'):
-                if len(r) != 15:
-                    raise ValueError('FEC format changed: expected 15 fields, including unused addresses.')
-                cid,name,party,year,state,office,district = r[:7]
-                name = display_name(name)
-                if not cid or len(name.split()) < 2:
-                    continue
-                store.candidate(cid,name,known_at=retrieved,source_url=source)
-                store.con.execute('INSERT OR IGNORE INTO cs_candidate_cycles VALUES(?,?,?,?,?,?,?,?,?,?)',
-                    (cid,cycle,office,state,district,party,int(year) if year.isdigit() else None,
-                     'registry_only',retrieved,source))
-                n += 1
-    store.con.commit()
+    try:
+        with store.con, zipfile.ZipFile(path) as z:
+            members = [i for i in z.infolist() if Path(i.filename).name.lower() == 'cn.txt']
+            if len(members) != 1:
+                raise FecAcquisitionError('archive','expected_one_candidate_master',cycle=cycle)
+            if members[0].file_size > 300_000_000:
+                raise FecAcquisitionError('archive','candidate_master_too_large',cycle=cycle)
+            with z.open(members[0]) as raw, io.TextIOWrapper(raw,encoding='utf-8-sig',errors='replace') as text:
+                # FEC's file is pipe-delimited text; quote marks are name data,
+                # not CSV escaping that can swallow subsequent fields/lines.
+                for line,r in enumerate(csv.reader(text,delimiter='|',quoting=csv.QUOTE_NONE),1):
+                    if len(r) != 15:
+                        raise FecAcquisitionError('parse','field_count_mismatch',cycle=cycle,row=line,field_count=len(r))
+                    cid,name,party,year,state,office,district = r[:7]
+                    name = display_name(name)
+                    if not cid or len(name.split()) < 2:
+                        continue  # Preserve the existing full-name eligibility rule.
+                    if len(normal(name).split()) < 2:
+                        raise FecAcquisitionError('parse','invalid_candidate_name',cycle=cycle,row=line)
+                    # Equivalent to candidate(..., aliases=None, person_id=None),
+                    # without its per-row commit: preserve all existing identity,
+                    # aliases, known_at and provenance, never assign a person_id.
+                    store.con.execute('''INSERT INTO cs_candidates
+                        (candidate_id,name,aliases_json,known_at,source_url,person_id)
+                        VALUES(?,?,?,?,?,NULL) ON CONFLICT(candidate_id) DO NOTHING''',
+                        (cid,name,dumps([name]),retrieved,source))
+                    store.con.execute('INSERT OR IGNORE INTO cs_candidate_cycles VALUES(?,?,?,?,?,?,?,?,?,?)',
+                        (cid,cycle,office,state,district,party,int(year) if year.isdigit() else None,
+                         'registry_only',retrieved,source))
+                    n += 1
+    except (zipfile.BadZipFile,RuntimeError,NotImplementedError):
+        raise FecAcquisitionError('archive','invalid_or_unsupported_zip',cycle=cycle) from None
     return n
 
 

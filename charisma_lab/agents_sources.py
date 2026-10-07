@@ -3,10 +3,12 @@ from __future__ import annotations
 import csv
 import json
 import zlib
+import tempfile
 from pathlib import Path
+from urllib.parse import urljoin,urlsplit
 from .agents_store import AgentStore
-from .importers import read_csv, require
-from .network import BudgetExceeded
+from .importers import read_csv, require, FecAcquisitionError
+from .network import BudgetExceeded, AccessBlocked
 from .util import now, iso, host, dumps, digest, dt
 
 
@@ -219,11 +221,50 @@ def download_fec_cycles(store,client,cycles,cache_dir):
         url=f'https://www.fec.gov/files/bulk-downloads/{year}/cn{year%100:02d}.zip'
         path=cache/f'fec_candidates_{year}.zip'
         if not path.exists():
-            response=client.get(url,min_interval=2,max_bytes=50_000_000)
-            if response.status_code!=200: raise ValueError(f'FEC download failed for {year}; no empty-success substitution')
-            if not response.content.startswith(b'PK'): raise ValueError('FEC endpoint did not return a ZIP')
-            temporary=path.with_suffix('.part');temporary.write_bytes(response.content);temporary.replace(path)
-        rows=import_fec_zip(store,path,year)
+            current=url; visited=set()
+            for hop in range(4):
+                if current in visited:
+                    raise FecAcquisitionError('download','redirect_loop',cycle=year)
+                visited.add(current)
+                try: response=client.get(current,min_interval=2,max_bytes=50_000_000)
+                except AccessBlocked:
+                    raise FecAcquisitionError('download','access_or_transport_blocked',cycle=year) from None
+                if response.status_code in {301,302,303,307,308}:
+                    location=response.headers.get('Location')
+                    if not location:
+                        raise FecAcquisitionError('download','redirect_missing_location',cycle=year,http_status=response.status_code)
+                    target=urljoin(current,location)
+                    try:
+                        parsed=urlsplit(target)
+                        permitted=(parsed.scheme=='https' and parsed.hostname in {'www.fec.gov','fec.gov'}
+                            and not parsed.username and not parsed.password and parsed.port in {None,443}
+                            and not parsed.query and not parsed.fragment)
+                    except ValueError: permitted=False
+                    if not permitted:
+                        raise FecAcquisitionError('download','redirect_not_permitted',cycle=year,http_status=response.status_code)
+                    if hop==3:
+                        raise FecAcquisitionError('download','redirect_limit',cycle=year,http_status=response.status_code)
+                    current=target
+                    continue  # Every hop uses the same client and durable allowance.
+                if response.status_code!=200:
+                    raise FecAcquisitionError('download','http_status',cycle=year,http_status=response.status_code)
+                if not response.content.startswith(b'PK'):
+                    raise FecAcquisitionError('download','response_not_zip',cycle=year,http_status=200)
+                break
+            temporary=None
+            try:
+                with tempfile.NamedTemporaryFile(prefix=path.name+'.',suffix='.part',dir=cache,delete=False) as f:
+                    temporary=Path(f.name);f.write(response.content)
+                # Failed validation leaves neither a partial roster nor a cached
+                # corrupt ZIP that every future run would silently reuse.
+                rows=import_fec_zip(store,temporary,year)
+                temporary.replace(path)
+            except OSError:
+                raise FecAcquisitionError('cache','io_error',cycle=year) from None
+            finally:
+                if temporary is not None: temporary.unlink(missing_ok=True)
+        else:
+            rows=import_fec_zip(store,path,year)
         report.append({'cycle':year,'imported_rows':rows,'source_url':url,'cache_path':str(path),
                        'file_sha256':__import__('hashlib').sha256(path.read_bytes()).hexdigest()})
     store.event('SourceAgent','download_fec',report=report);return report

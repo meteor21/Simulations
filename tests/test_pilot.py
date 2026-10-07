@@ -95,6 +95,23 @@ def test_missing_credential_blocks_even_fec_download(tmp_path, monkeypatch):
     assert any('MEDIACLOUD_API_KEY' in s for s in report['blockers'])
 
 
+def test_fec_failure_report_has_safe_actionable_diagnostics(tmp_path, monkeypatch):
+    from charisma_lab.importers import FecAcquisitionError
+    credential = 'nonsecret-test-fixture'
+    monkeypatch.setenv('MEDIACLOUD_API_KEY', credential)
+    def unavailable(*args, **kwargs):
+        raise FecAcquisitionError('download', 'http_status', cycle=2026, http_status=404)
+    monkeypatch.setattr('charisma_lab.pilot.download_fec_cycles', unavailable)
+    report = run_pilot(tmp_path / 'out', run_network=True, download_fec=True)
+    assert report['fec_error'] == {'stage': 'download', 'reason': 'http_status',
+                                   'cycle': 2026, 'http_status': 404}
+    assert report['status'] == 'blocked'
+    assert report['selected_candidates'] == 0
+    assert report['http_attempts_total'] == 0
+    assert credential not in (tmp_path / 'out/pilot_report.json').read_text()
+    assert 'FEC acquisition failed: download/http_status' in report['blockers']
+
+
 def test_insufficient_cohort_blocks_provider_with_credential(tmp_path, monkeypatch):
     monkeypatch.setenv('MEDIACLOUD_API_KEY', 'fixture-secret-not-real')
     monkeypatch.setattr(HttpClient, 'get', lambda *a, **kw: pytest.fail('No provider request permitted'))

@@ -19,6 +19,8 @@ def source_files():
         files += [p for p in (ROOT / folder).rglob('*') if p.is_file() and
                   '__pycache__' not in p.parts and p.suffix in {'.py', '.csv', '.md', '.jsonl'}]
     files += [ROOT / 'reports/VALIDATION.md'] if (ROOT / 'reports/VALIDATION.md').is_file() else []
+    # Workflow regression tests execute the embedded inline Python steps too.
+    files += [p for p in (ROOT / '.github/workflows').glob('*.yml') if p.is_file()]
     return sorted(files)
 
 

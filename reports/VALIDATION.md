@@ -10,7 +10,7 @@ No earlier pass claim was accepted without rerunning its checks.
 |---|---|---|
 | Original recovered Python package | 116 passed, 0 failed, 0 skipped | `baseline_tests.xml`, `baseline_tests.log` |
 | Original offline notebook defaults | 13 code cells / 25 total, all executed in order in a shared Python namespace | `baseline_notebook.json` |
-| Corrected integrated suite | **195 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
+| Corrected integrated suite | **217 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
 | Three-worker synthetic demonstration | Both invented candidates: national 80, local 20, media recency 50, in-office true | `agents_demo.json` |
 | Legacy synthetic offline demonstration | SYN-A standing 76.889029 → 51.081959; SYN-B stays missing | `offline_demo.log` |
 | Corrected notebook defaults | **14/14 code cells**, fresh Jupyter kernel, no errors, zero network attempts | `notebook_execution.json`, `notebook_validation.log` |
@@ -21,7 +21,7 @@ No earlier pass claim was accepted without rerunning its checks.
 | Pilot preflight | Exit 2 with explicit missing registry; 0 selected real candidates, **0 HTTP attempts** | `pilot_preflight.log`, `pilot/pilot_report.json` |
 | Live provider, publisher scrape, downloaded neural inference, Colab Drive | **Not run / not validated** | Missing prerequisites and optional scope below |
 
-The new total includes 79 added regression cases. Existing assertions were not
+The new total includes 101 added regression cases. Existing assertions were not
 silently disabled: the old expectation permitting writes into unrelated databases
 was corrected to require refusal, and the old blanket-surname masking assertion
 was corrected to preserve a rival's identity. Synthetic annotation helpers now
@@ -116,3 +116,71 @@ rejection of fixture files labeled real. The notebook now has 14 code cells
 (including results import) and 27 total cells. Both default execution and actual
 bundle import were validated in a fresh local kernel. `GITHUB_HANDOFF.md` records
 current commands/results; earlier audit evidence is preserved in `*.pre_github.*`.
+
+## Failed live Actions run and workflow correction
+
+Public run `37558917645` at commit `5e0940a` failed in credential preflight;
+dependency installation and live collection were skipped. Its unconditional export
+then imported `charisma_lab`, whose scoring import requires NumPy. This produced
+the screenshot's secondary `ModuleNotFoundError`, not a missing dependency in the
+project manifest. No provider collection was reached in that run. A later user
+screenshot shows the correctly named repository Actions secret now exists;
+credential validity and real provider responses still require a new live run.
+
+The export now requires successful installation, checks for output directories
+before importing the package, and still exports partial tables after collection
+failure. Empty/whitespace credentials produce an explicit GitHub error annotation
+with the secure repository settings link, without printing the value. Official
+`checkout`, `setup-python` and `upload-artifact` v6 releases were checked against
+their repositories and `action.yml` files: all use Node.js 24. Both workflows pin
+`ubuntu-24.04` and support replacing artifacts on a job rerun. The durable pilot
+budget and collection limit are unchanged.
+
+Actual verification from the isolated environment:
+
+```bash
+/workspace/.venvs/midterm-sentiment/bin/python -m pytest tests/test_workflows.py
+# Before the fix: 3 failed, 2 passed; reproduces the exact NumPy traceback.
+# After the fix: 5 passed, including dependency-free export/preflight execution,
+# partial-results transfer preserving missingness, and no credential echo.
+/workspace/.venvs/midterm-sentiment/bin/python -m pytest --junitxml=reports/test_results.xml
+# Final integrated workflow/FEC correction: 217 passed, 0 failed/skipped.
+/workspace/.venvs/midterm-sentiment/bin/python -m pip check
+# No broken requirements found.
+```
+
+Workflow YAML is included in the regenerated embedded package so its regression
+tests also have their inputs in a notebook extraction. Start a new manual workflow
+on latest `main`; **Re-run jobs** keeps the old workflow revision. This correction
+does not claim that the live pilot or real sentiment analysis has succeeded.
+
+A subsequent retry of the same public run (job `112592603916`) passed credential
+presence and reached collection. The user-provided log reports `FEC acquisition
+failed: ValueError`, zero selected candidates, one sent HTTP attempt and one remote
+reservation. A read-only fetch of `midterm-pilot-budget` confirmed `used=1` with
+the original 20-request limit and policy. No additional FEC or Media Cloud requests
+were made from this cloud checkout. The older report omitted response status and
+parser stage, so the actual remote FEC failure cause cannot be established from it.
+This is a new acquisition blocker, distinct from the original skipped-install
+export bug. The supplied key's presence is established; API validity is not.
+
+Offline regression fixtures confirmed two FEC implementation defects: a normal
+same-domain HTTPS redirect was refused instead of following a separately counted
+hop, and a malformed later row left previously imported identities committed.
+The importer now commits the entire ZIP atomically, preserves prior identity
+metadata, and reads quotes as literal pipe-delimited field data. Downloads follow
+at most three redirects within the official HTTPS FEC domain, using the same client
+and durable request allowance; unfamiliar hosts and unsafe locations stay blocked.
+Only a successfully parsed ZIP becomes a cache entry. Safe structured diagnostics
+identify download, archive and parser failures without raw response text, candidate
+addresses, credential values or exception details. These fixtures establish the
+software fixes; they do not establish which defect caused the uninstrumented live
+failure or that the official endpoint will succeed on the next run.
+
+The FEC regression file adds 16 cases, plus one pilot-report integration case.
+Together with the five workflow cases this follow-up adds 22 regressions to the
+previous 195-test suite. The final suite executed 217 tests successfully. Default
+notebook execution and actual bundle import each executed all 14 code cells with
+zero errors and network attempts after regeneration; the bundle import report is
+`artifacts/notebook_bundle_import.json`. The original live report remains a failed
+acquisition attempt, not a completed real-data validation.

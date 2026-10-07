@@ -99,3 +99,18 @@ only quota metadata. Never reset/delete it to bypass 20 attempts; a new runner's
 local database does not create a new allowance. Restore retained pilot artifacts
 when possible. Partial outputs and missing annotations are not completed sentiment
 analysis. Live Actions still needs the securely configured provider secret.
+
+For workflow failures, inspect the first failing step before treating an `always()`
+export error as the cause. Credential preflight uses only the standard library;
+export requires successful installation and checks for outputs before importing
+the package. Verify these failure paths with `python -m pytest tests/test_workflows.py`.
+After updating workflow YAML, start a new run on latest `main`; rerunning an old
+job keeps the old workflow revision. Do not copy the Actions secret to code or chat.
+
+The user subsequently configured the repository Actions secret. A retry of run
+`37558917645` passed credential presence and attempted FEC acquisition, but failed
+with generic `ValueError` before selecting any candidates. The remote budget was
+verified as 1/20 used; preserve that counter and remaining 19 attempts. This is not
+evidence of a valid Media Cloud response or completed real sentiment analysis.
+Inspect the structured `fec_error` in `pilot_report.json` on the next updated run;
+do not guess that a download, redirect or parser failure means an empty electorate.

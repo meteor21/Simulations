@@ -11,13 +11,13 @@ permissions:
 
 jobs:
   offline-analysis:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
       PYTHONUNBUFFERED: "1"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
           cache: pip
@@ -37,7 +37,7 @@ jobs:
       - name: Verify notebook result import
         run: python scripts/validate_notebook.py --results-bundle artifacts/offline-analysis.zip --report artifacts/notebook_bundle_import.json
       - name: Upload results and validation evidence
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: midterm-offline-analysis-${{ github.sha }}
@@ -47,4 +47,5 @@ jobs:
             artifacts/notebook_execution.json
             artifacts/notebook_bundle_import.json
           if-no-files-found: error
+          overwrite: true
           retention-days: 14

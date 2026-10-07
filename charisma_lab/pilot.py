@@ -17,7 +17,7 @@ from .agents_analysis import FeatureConfig
 from .agents_collect import select_cohort
 from .agents_sources import download_fec_cycles, import_bias, import_profiles
 from .agents_store import AgentStore
-from .importers import import_fec_zip, import_funding, import_candidates, import_roster
+from .importers import FecAcquisitionError, import_fec_zip, import_funding, import_candidates, import_roster
 from .network import BudgetExceeded, HttpClient
 from .util import dumps, iso, now, dt
 
@@ -148,6 +148,9 @@ def run_pilot(output, *, run_network=False, download_fec=False, funding_db=None,
                 "SELECT 1 FROM cs_candidate_cycles WHERE cycle=? AND office IN ('H','S') LIMIT 1", (cycle,)):
             try:
                 report['fec'] = download_fec_cycles(store, client, [cycle], output / 'downloads')
+            except FecAcquisitionError as exc:
+                report['fec_error'] = exc.details
+                report['blockers'].append('FEC acquisition failed: ' + exc.details['stage'] + '/' + exc.details['reason'])
             except Exception as exc:
                 report['blockers'].append('FEC acquisition failed: ' + type(exc).__name__)
         cohort, plan = prepare_pilot(store, output, cycle=cycle, start=start, as_of=as_of, roster_only=bool(roster))

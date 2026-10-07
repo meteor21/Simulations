@@ -99,8 +99,17 @@ and real bundles distinct, preserve missingness and retain rights/provenance.
 The separate **Real 24-candidate pilot** workflow is manual-only. Add
 `MEDIACLOUD_API_KEY` to repository **Settings → Secrets and variables → Actions**,
 then open **Actions → Real 24-candidate pilot → Run workflow** on `main`.
-The key is supplied only to the collection step through the Actions secret binding.
+The key is supplied to credential preflight and collection through the Actions secret binding.
 Use a replacement for any key exposed in chat. Do not paste keys into workflow YAML.
+
+If credential preflight fails, verify that the secret is under **Repository secrets**
+with the exact name above; Variables, Colab Secrets and unbound environment secrets
+do not supply this workflow. Start **Run workflow** on the latest `main` after a
+workflow fix: **Re-run jobs** retains the original run's older workflow revision.
+Export is skipped if dependency installation did not succeed, and checks for
+available outputs before importing package dependencies. It still exports partial
+tables if collection fails after installation. The workflows use Node.js 24 actions
+on `ubuntu-24.04` to avoid the obsolete action-runtime and moving-runner warnings.
 
 The job imports official FEC registrations when no sourced registry is present,
 selects and exports 24 IDs, resolves sources and collects within the existing
@@ -110,6 +119,13 @@ sentiment values or run a paid model. Newly discovered headlines alone are not a
 validated candidate-sentiment analysis; reviewed labels or an explicitly validated
 annotation method are still needed. Partial collection can produce a failed job
 with useful outputs; inspect `pilot_report.json` rather than treating failure as zero news.
+
+For FEC failures, inspect `fec_error` in that report for the sanitized stage,
+reason and HTTP status or parser row/field count when available. Normal HTTPS
+redirects within the official FEC domain consume a separate reservation for each
+hop. Redirects outside that boundary remain blocked. Acquisition failure is not
+proof of no candidates. A malformed import must not leave a partially committed
+roster that a later run could mistake for a completed registry.
 
 GitHub runners are temporary, so the request counter is committed **before every
 provider attempt** to the separate `midterm-pilot-budget` branch. That branch holds
