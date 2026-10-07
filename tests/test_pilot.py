@@ -156,6 +156,55 @@ def test_source_access_denial_prevents_candidate_collection(tmp_path, monkeypatc
     assert any(f'HTTP {status}' in blocker for blocker in report['blockers'])
 
 
+def test_checkpoint_analysis_preserves_counter_and_missing_sentiment_without_network(tmp_path, monkeypatch):
+    monkeypatch.setattr(HttpClient, 'get', lambda *args, **kwargs: pytest.fail('Checkpoint analysis must make no provider calls'))
+    output = tmp_path / 'out'
+    output.mkdir()
+    with AgentStore(output / 'pilot.sqlite') as store:
+        seed(store)
+    run_pilot(output)  # Initialize the original pilot policy without network calls.
+    with AgentStore(output / 'pilot.sqlite') as store:
+        ledger = RequestLedger(store, policy={'cycle': 2026, 'start': '2026-09-01', 'as_of': '2026-10-06',
+            'provider': 'mediacloud', 'candidate_limit': 24, 'roster_only': False})
+        for _ in range(3): ledger.reserve()
+        store.article(url='https://fixture.example/campaign', title='Fixture Person0 campaign',
+                      candidate_ids=['SYNTHETIC_0'], published_at='2026-09-01', retrieved_at='2026-09-02')
+        store.con.commit()
+    report = run_pilot(output, analyze_existing=True)
+    assert report['status'] == 'analyzed_partial'
+    assert report['analysis_only'] is True
+    assert report['selected_candidates'] == len(report['run']['features']) == 24
+    assert report['http_attempts_before'] == report['http_attempts_total'] == 3
+    assert report['provider_attempts_sent_this_run'] == report['http_attempts_this_run'] == 0
+    assert report['observations']['unique_article_urls'] == 1
+    assert all(r['media_recency_score'] is None for r in report['run']['features'])
+    assert (output / 'exports/candidate_sentiment_summary.csv').is_file()
+
+
+def test_checkpoint_analysis_cannot_create_a_new_database_or_quota(tmp_path):
+    output = tmp_path / 'missing'
+    with pytest.raises(ValueError, match='already initialized'):
+        run_pilot(output, analyze_existing=True)
+    assert not output.exists()
+
+
+def test_checkpoint_analysis_refuses_a_database_without_the_original_ledger(tmp_path):
+    output = tmp_path / 'out'
+    output.mkdir()
+    with AgentStore(output / 'pilot.sqlite') as store:
+        seed(store)
+    with pytest.raises(ValueError, match='original pilot request ledger'):
+        run_pilot(output, analyze_existing=True)
+    with AgentStore(output / 'pilot.sqlite') as store:
+        assert not store.rows("SELECT 1 FROM cs_meta WHERE key='pilot_request_policy'")
+
+
+@pytest.mark.parametrize('options', [{'run_network': True}, {'download_fec': True}, {'fec_zip': 'new-input.zip'}])
+def test_checkpoint_analysis_cannot_enable_collection_or_new_imports(tmp_path, options):
+    with pytest.raises(ValueError, match='cannot collect or import'):
+        run_pilot(tmp_path, analyze_existing=True, **options)
+
+
 def test_insufficient_cohort_blocks_provider_with_credential(tmp_path, monkeypatch):
     monkeypatch.setenv('MEDIACLOUD_API_KEY', 'fixture-secret-not-real')
     monkeypatch.setattr(HttpClient, 'get', lambda *a, **kw: pytest.fail('No provider request permitted'))

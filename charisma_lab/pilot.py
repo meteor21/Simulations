@@ -106,14 +106,22 @@ def prepare_pilot(store, output, *, cycle=2026, start='2026-09-01', as_of='2026-
 
 
 def run_pilot(output, *, run_network=False, download_fec=False, funding_db=None, fec_zip=None,
-              candidates=None, roster=None, cycle=2026, start='2026-09-01', as_of='2026-10-06', github_budget=False):
+              candidates=None, roster=None, cycle=2026, start='2026-09-01', as_of='2026-10-06',
+              github_budget=False, analyze_existing=False):
     output = Path(output).expanduser().resolve()
+    if analyze_existing:
+        if run_network or download_fec or funding_db or fec_zip or candidates or roster:
+            raise ValueError('Existing-checkpoint analysis cannot collect or import new input data')
+        if not (output / 'pilot.sqlite').is_file():
+            raise ValueError('Existing-checkpoint analysis requires an already initialized pilot database')
     output.mkdir(parents=True, exist_ok=True)
     policy = {'cycle': cycle, 'start': start, 'as_of': as_of, 'provider': 'mediacloud',
               'candidate_limit': 24, 'roster_only': bool(roster)}
     if iso(as_of) > now():
         raise ValueError('Live/offline pilot cutoff cannot be in the future')
     with AgentStore(output / 'pilot.sqlite') as store:
+        if analyze_existing and not store.rows("SELECT 1 FROM cs_meta WHERE key='pilot_request_policy'"):
+            raise ValueError('Existing-checkpoint analysis requires the original pilot request ledger; no new quota created')
         ledger = RequestLedger(store, policy=policy)
         root = Path(__file__).resolve().parents[1]
         import_profiles(store, root / 'data/source_profiles.csv')
@@ -199,7 +207,24 @@ def run_pilot(output, *, run_network=False, download_fec=False, funding_db=None,
         report['observations'] = {
             'unique_article_urls': store.rows('SELECT COUNT(*) AS n FROM cs_articles')[0]['n'],
             'candidate_annotations': store.rows('SELECT COUNT(*) AS n FROM cs_annotations')[0]['n'],
+            'reviewed_annotations': store.rows('SELECT COUNT(*) AS n FROM cs_annotations WHERE reviewed=1')[0]['n'],
         }
+        if analyze_existing and not report['blockers']:
+            report['run'] = SentimentWorkflow(store).run(cohort, as_of, run_network=False,
+                feature_config=FeatureConfig(mode='retrospective', reviewed_only=True))
+            report['analysis_only'] = True
+            report['warnings'] = []
+            if not report['observations']['reviewed_annotations']:
+                report['warnings'].append('No reviewed candidate-specific sentiment annotations; scores remain missing')
+            elif any(r.get('media_recency_score') is None for r in report['run'].get('features', [])):
+                report['warnings'].append('Some candidate sentiment scores remain missing')
+            report['coverage_statuses'] = store.rows('SELECT status,COUNT(*) AS groups FROM sa_plan_audit GROUP BY status')
+            if any(r['status'] in {'partial_source_resolution', 'blocked_unresolved_source_ids', 'no_source_panel'}
+                   for r in report['coverage_statuses']):
+                report['warnings'].append('Source coverage remains incomplete; this analysis does not fill missing coverage')
+            if store.rows("SELECT 1 FROM cs_jobs WHERE status IN ('blocked','error') LIMIT 1"):
+                report['warnings'].append('Saved collection has blocked/error jobs; inspect the original collection report')
+            report['status'] = 'analyzed_partial' if report['warnings'] else 'analyzed'
         report['http_attempts_total'] = ledger.used
         report['http_attempts_this_run'] = ledger.used - report['http_attempts_before']
         report['provider_attempts_sent_this_run'] = client.requests_used
@@ -220,6 +245,7 @@ def main():
     parser.add_argument('--run-network', action='store_true')
     parser.add_argument('--download-fec', action='store_true', help='One shared-budget official registration ZIP; needs --run-network and provider credential')
     parser.add_argument('--github-budget', action='store_true', help='Reserve every request on the persistent midterm-pilot-budget Git branch before sending')
+    parser.add_argument('--analyze-existing', action='store_true', help='Analyze an existing pilot checkpoint with zero provider requests; preserve missingness')
     parser.add_argument('--funding-db', type=Path, help='Existing federal_candidate_cycle database, opened read-only')
     parser.add_argument('--fec-zip', type=Path, help='Previously obtained official candidate master ZIP')
     parser.add_argument('--candidates', type=Path, help='Explicit sourced candidate identities; pair with --roster')

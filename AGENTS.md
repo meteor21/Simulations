@@ -65,7 +65,7 @@ After Python/data/documentation changes, run `python scripts/sync_notebook.py`
 then `--check` and re-execute the offline notebook. Do not edit the embedded base64
 payload manually. Its content hash and module-location guard prevent stale reuse.
 
-## Pilot procedure and current blocker
+## Pilot procedure and observed live state
 
 ```bash
 # Offline plan/preflight; exit 2 is intentional when a sourced roster is absent.
@@ -78,8 +78,13 @@ Use `--funding-db PATH` (read-only), `--fec-zip PATH`, or `--candidates PATH
 --roster PATH` for existing sourced inputs; see `docs/PILOT.md`. Same pilot folder,
 policy and roster are required on resume. A missing credential blocks even the
 optional FEC request. Do not mark an empty roster or a zero-test run as validation.
-Current audit has no real registry or Media Cloud key; real pilot data remain
-uncollected. Header-only roster exports and explicit blockers are intentional.
+The initial local preflight had no registry or credential and exported header-only
+rosters. The user subsequently configured the GitHub repository Actions secret.
+Run `37680664034` now holds 24 real FEC registrations and 3 unique news URLs, with
+zero sentiment annotations. These registrations are discovery records, not verified
+contestants. The collection reported blocked/partial completeness; inspect its saved
+report before resuming. The durable Git budget is **16/20 used**, leaving four
+attempts. Do not spend them merely to retry an unchanged failure or reset the quota.
 
 ## GitHub and Colab handoff
 
@@ -115,7 +120,7 @@ evidence of a valid Media Cloud response or completed real sentiment analysis.
 Inspect the structured `fec_error` in `pilot_report.json` on the next updated run;
 do not guess that a download, redirect or parser failure means an empty electorate.
 
-Latest run `37560296917` confirmed `download/redirect_not_permitted`, HTTP 302,
+Earlier run `37560296917` confirmed `download/redirect_not_permitted`, HTTP 302,
 and 2/20 requests spent. FEC's immutable production proxy configuration at commit
 `42a867c3c0fc6d86584f024f09ec990d725a022c` documents its exact government AWS
 bucket; permit only that host and the requested `/bulk-downloads/YYYY/cnYY.zip`.
@@ -129,3 +134,24 @@ workflow using the repository secret. Only edit that file to request an authoriz
 live run; ordinary pushes must not trigger collection. Manual dispatch remains
 available. Never create a new quota through the request file. Keep summaries of
 observed articles/annotations separate from a claim of validated sentiment.
+
+Analyze the existing real checkpoint with `pilot-analysis.yml`, which has no provider
+secret and read-only GitHub permissions. It downloads both artifacts from the exact
+specified collection run, never starts collection, and preserves the original
+blockers in `analysis_report.json`. Manual dispatch takes `source_run_id`; an explicit
+`.github/pilot-analysis-request.json` change can request the same offline analysis
+when API dispatch is unavailable. This is separate from the live request file.
+
+```bash
+# In GitHub Actions with its injected GitHub token; no Media Cloud key is needed.
+python scripts/analyze_github_pilot.py --source-run-id 37680664034 --output artifacts/analyzed-pilot --bundle artifacts/real-analysis.zip
+python scripts/validate_notebook.py --results-bundle artifacts/real-analysis.zip --report artifacts/real_notebook_import.json
+# For an already restored checkpoint, without artifact API access:
+python -m charisma_lab.pilot --output PATH_TO_RESTORED_PILOT --analyze-existing
+```
+
+Use an empty dedicated destination for artifact analysis. Existing databases/bundles
+are refused. `--analyze-existing` requires the original ledger/policy and cannot
+collect or import new inputs; its HTTP count must remain unchanged. Preserve missing
+scores when reviews or coverage are absent. Results are `dataset_kind=real`, while
+the default notebook demonstration remains explicitly synthetic.

@@ -1,7 +1,7 @@
 # Midterm Sentiment Agents v0.2 — reproduced and corrected validation
 
-Audit date: October 6, 2026 (America/New_York). Machine logs use UTC and may show
-October 7. The supplied report is retained verbatim as `VALIDATION.original.md`.
+Initial audit: October 6, 2026; acquisition/checkpoint follow-up: October 7, 2026.
+The supplied report is retained verbatim as `VALIDATION.original.md`.
 No earlier pass claim was accepted without rerunning its checks.
 
 ## Current evidence
@@ -10,7 +10,7 @@ No earlier pass claim was accepted without rerunning its checks.
 |---|---|---|
 | Original recovered Python package | 116 passed, 0 failed, 0 skipped | `baseline_tests.xml`, `baseline_tests.log` |
 | Original offline notebook defaults | 13 code cells / 25 total, all executed in order in a shared Python namespace | `baseline_notebook.json` |
-| Corrected integrated suite | **239 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
+| Corrected integrated suite | **265 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
 | Three-worker synthetic demonstration | Both invented candidates: national 80, local 20, media recency 50, in-office true | `agents_demo.json` |
 | Legacy synthetic offline demonstration | SYN-A standing 76.889029 → 51.081959; SYN-B stays missing | `offline_demo.log` |
 | Corrected notebook defaults | **14/14 code cells**, fresh Jupyter kernel, no errors, zero network attempts | `notebook_execution.json`, `notebook_validation.log` |
@@ -19,9 +19,10 @@ No earlier pass claim was accepted without rerunning its checks.
 | Real source directory | 63 profiles: 12 national, 50 state-focused, 1 metro; 50 state codes | Existing executed source-seed tests |
 | Source ratings | 6 attributed, dated snapshots; unknown/current-vs-historical distinctions retained | Executed seed and provenance tests |
 | Pilot preflight | Exit 2 with explicit missing registry; 0 selected real candidates, **0 HTTP attempts** | `pilot_preflight.log`, `pilot/pilot_report.json` |
-| Live provider, publisher scrape, downloaded neural inference, Colab Drive | **Not run / not validated** | Missing prerequisites and optional scope below |
+| Bounded real FEC/Media Cloud collection | 24 registrations, 3 unique news URLs, 0 annotations; blocked/partial completeness; **16/20 cumulative attempts** | [Run 37680664034](https://github.com/meteor21/Simulations/actions/runs/37680664034), Git budget branch |
+| Publisher scrape, downloaded neural inference, Colab Drive | **Not run / not validated** | Optional scope; reviewed labels remain missing |
 
-The new total includes 123 added regression cases. Existing assertions were not
+The new total includes 149 added regression cases. Existing assertions were not
 silently disabled: the old expectation permitting writes into unrelated databases
 was corrected to require refusal, and the old blanket-surname masking assertion
 was corrected to preserve a rival's identity. Synthetic annotation helpers now
@@ -63,9 +64,9 @@ The original notebook was executed without changing any default code cells; the
 corrected notebook was additionally tested with HTTP/socket-denial guards. Neither
 check exercises Colab-specific storage mounting or a production search response.
 
-## Pilot blockers and exact next steps
+## Initial pilot blockers and setup history
 
-No `MEDIACLOUD_API_KEY` is present in the actual process, and the initial environment
+At the initial audit no `MEDIACLOUD_API_KEY` was present in the actual process, and the initial environment
 configuration declared no credential bindings. There is no real candidate registry,
 FEC ZIP, funding database or sourced 24-candidate roster among the uploaded files.
 The uploaded CSV is a source catalog, not a candidate roster; it exactly matches
@@ -81,9 +82,10 @@ and publish the prepared environment. Then rerun the bounded pilot command in
 `docs/PILOT.md`, or supply existing sourced input files. FEC discovery is permitted
 only with the live prerequisites and counts toward the same 20-request allowance.
 
-A synthetic 24-person pilot regression tests selection and exports, and transport
+A synthetic 24-person pilot regression tested selection and exports, and transport
 fixtures prove retries plus restarts cannot exceed the durable ceiling. Those are
-software tests, **not** a completed 24-real-candidate live pilot. No access denial
+software tests, **not** live pilot evidence. Subsequent real collection is recorded
+below separately. No access denial
 was bypassed and no paid service was purchased.
 
 ## Research limitations
@@ -234,3 +236,47 @@ Media Cloud provider, so it is not the cause of this failure. These software-sou
 checks made no FEC or Media Cloud data-provider requests and do not validate the
 user's provider account or real sentiment accuracy. Real run outcomes must be
 reported separately from these passing offline checks.
+
+## Actual real collection and retained-checkpoint analysis
+
+After the corrected source passed [GitHub offline CI 37680428871](https://github.com/meteor21/Simulations/actions/runs/37680428871),
+the separate request commit `8041f94b9ac8b803e228c86d3f89b2461c479215`
+started the already authorized live pilot. [Run 37680664034](https://github.com/meteor21/Simulations/actions/runs/37680664034)
+imported FEC records, selected **24 actual congressional registrations**, and saved
+**3 unique news URLs**. Its result notice reports zero candidate annotations and
+blocked completeness. Four requests remain: a read-only Git fetch confirmed 16
+durable reservations, including the two earlier failed acquisition attempts.
+The cutoff remains October 6, 2026; discovery is retrospective, and registrations
+are not promoted to verified contestants. No sentiment accuracy claim follows from
+these news metadata counts.
+
+The cloud proxy denies the GitHub REST API, so it cannot fetch private artifact
+reports or dispatch jobs here. The read-only `pilot-analysis.yml` workflow instead
+uses GitHub's own injected token to retrieve both artifacts from that exact run,
+recompute existing features with **zero provider calls**, export real tables, and
+execute the Colab import cell. It preserves the original collection report and
+both code revisions in `analysis_report.json`. No Media Cloud secret is bound to
+this analysis workflow. Missing/expired artifacts fail without a new crawl fallback.
+The new `--analyze-existing` mode requires the saved database, original ledger and
+unchanged policy; it cannot download or import new inputs. Zero reviewed annotations
+produce missing scores and an explicit `analyzed_partial` result.
+
+Actual local verification:
+
+```bash
+/workspace/.venvs/midterm-sentiment/bin/python -m pytest --junitxml=reports/test_results.xml > reports/test_results.log 2>&1
+# 265 passed in 2.75s; no failures/errors/skips.
+/workspace/.venvs/midterm-sentiment/bin/python scripts/sync_notebook.py
+/workspace/.venvs/midterm-sentiment/bin/python scripts/sync_notebook.py --check
+/workspace/.venvs/midterm-sentiment/bin/python scripts/validate_notebook.py
+/workspace/.venvs/midterm-sentiment/bin/python scripts/run_offline_analysis.py --output artifacts
+/workspace/.venvs/midterm-sentiment/bin/python scripts/validate_notebook.py --results-bundle artifacts/offline-analysis.zip --report artifacts/notebook_bundle_import.json
+```
+
+Six new checkpoint-mode tests and twenty retained-artifact tests use explicitly
+synthetic fixtures. They enforce zero HTTP calls, unchanged counters, required
+ledger/policy, original-run matching, bounded sizes, symlink rejection, refusal to
+overwrite existing databases/bundles, missing artifact failure, preservation of
+original blockers and separate collection/analysis code provenance. They do not
+substitute for analysis of the real retained run. Its verified outcome is recorded
+separately in `LIVE_PILOT_RUN.md` when the GitHub job completes.

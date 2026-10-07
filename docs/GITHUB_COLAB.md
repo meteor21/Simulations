@@ -2,7 +2,9 @@
 
 Git stores code and its history. **GitHub Actions** runs the Python analyses.
 **Colab** opens the notebook and imports exported results for further exploration.
-The initial analysis is entirely synthetic: there is no real candidate-news corpus yet.
+The default demonstration is synthetic. The bounded real pilot has collected 24
+FEC registrations and 3 news URLs, but no reviewed sentiment annotations. Real
+sentiment scores therefore remain missing.
 
 ## 1. Keep the project on GitHub
 
@@ -75,7 +77,7 @@ execute archive contents or overwrite an election database. The Colab browser
 file picker and Drive integration need execution in your Colab session; local
 validation exercises the same bundle reader/import cell in a fresh Jupyter kernel.
 
-## 4. Move to real data separately
+## 4. Real data and provider access
 
 The current provider is **Media Cloud**: https://search.mediacloud.org/ . Follow
 https://www.mediacloud.org/documentation/search-api-guide for API access and key
@@ -83,9 +85,10 @@ instructions. Store the key securely as `MEDIACLOUD_API_KEY` in the relevant run
 (e.g. Colab Secrets). GitHub's offline workflow does not need it. Secrets configured
 in Codex, Colab and GitHub are separate; they are not copied automatically.
 
-First obtain a sourced 24-candidate registry and run the bounded pilot described
-in `PILOT.md`, sharing the same persistent 20-request allowance across retries,
-lookups and restarts. Use the durable GitHub budget described below; ephemeral runners must not restart that allowance.
+The pilot in `PILOT.md` shares one persistent 20-request allowance across retries,
+lookups and restarts. Run `37680664034` obtained the sourced 24-candidate registry
+and saved real news metadata, using 16 of those requests cumulatively. Use the durable
+GitHub budget described below; ephemeral runners must not restart that allowance.
 Initial candidate membership from FEC is registration discovery, not a certified
 ballot roster. Real sentiment also needs permitted texts/metadata and reviewed
 candidate-specific annotations; a provider key alone does not create validated scores.
@@ -160,3 +163,36 @@ This workflow requires Actions to have permission to write the budget branch and
 read prior artifacts. If repository policy disallows the write, it fails closed
 before the provider request. Checkpoints and artifact visibility follow repository
 access rules; do not upload licensed article bodies or private reviews casually.
+
+## Analyze saved real data without further provider calls
+
+**Actions → Analyze saved real pilot** downloads the database checkpoint and original
+results from one exact collection run. Supply `source_run_id=37680664034`. The job
+recomputes available reviewed features offline, exports `real-analysis.zip`, and
+executes the Colab import cell with those actual tables. It has no Media Cloud key
+binding and makes zero provider requests. The original collection's blockers and
+both code revisions remain in `analysis_report.json`; a successful offline analysis
+does not mean the source panel or sentiment annotations are complete.
+
+For authorized analysis when dispatch is unavailable, change
+`.github/pilot-analysis-request.json` on `main` with
+`format=midterm-pilot-analysis-request-v1` and the exact numeric `source_run_id`.
+Changing this file never triggers the live-collection workflow.
+
+Download `midterm-real-analysis-<analysis-run-id>` from the successful analysis run.
+Import its ZIP, or the inner `real-analysis.zip`, using the notebook's last cell.
+The roster is `RESULTS_TABLES['pilot/selected_congressional_cohort.csv']`; the
+feature table is `RESULTS_TABLES['agents/candidate_sentiment_summary.csv']`.
+Missing reviewed scores stay missing. The separate audit JSON explains partial
+coverage and keeps registrations distinguishable from verified contestants.
+
+To reproduce the retained-artifact analysis in an authorized GitHub runtime:
+
+```bash
+python scripts/analyze_github_pilot.py --source-run-id 37680664034 --output artifacts/analyzed-pilot --bundle artifacts/real-analysis.zip
+python scripts/validate_notebook.py --results-bundle artifacts/real-analysis.zip --report artifacts/real_notebook_import.json
+```
+
+Artifacts expire after 30 days. This operation refuses existing output databases or
+bundles and fails if either original artifact is missing; it cannot fall back to a
+new crawl or a new request allowance.
