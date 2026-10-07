@@ -1,0 +1,6 @@
+{
+  "format": "midterm-pilot-analysis-request-v1",
+  "request_id": "analyze-retained-real-pilot-2026-10-07",
+  "source_run_id": "37680664034",
+  "reason": "Analyze the saved real checkpoint and verify Colab import with zero additional provider requests. Preserve the original partial-collection report and 16/20 spent requests."
+}
