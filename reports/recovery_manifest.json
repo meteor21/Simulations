@@ -1,0 +1,87 @@
+{
+  "recovery": "Safely extracted base64 ZIP without executing uploaded bootstrap",
+  "original_package_files": 56,
+  "changed_original_files": [
+    "README.md",
+    "charisma_lab/agents.py",
+    "charisma_lab/agents_analysis.py",
+    "charisma_lab/agents_collect.py",
+    "charisma_lab/agents_rss.py",
+    "charisma_lab/agents_store.py",
+    "charisma_lab/annotate.py",
+    "charisma_lab/collect.py",
+    "charisma_lab/evaluate.py",
+    "charisma_lab/importers.py",
+    "charisma_lab/network.py",
+    "charisma_lab/scoring.py",
+    "charisma_lab/scrape.py",
+    "charisma_lab/store.py",
+    "examples/offline_demo.py",
+    "pyproject.toml",
+    "tests/test_agents.py",
+    "tests/test_core.py",
+    "tests/test_delivery.py",
+    "tests/test_workers.py"
+  ],
+  "unchanged_original_files": [
+    "charisma_lab/__init__.py",
+    "charisma_lab/__main__.py",
+    "charisma_lab/agents_bias.py",
+    "charisma_lab/agents_sources.py",
+    "charisma_lab/cli.py",
+    "charisma_lab/history.py",
+    "charisma_lab/util.py",
+    "data/README.md",
+    "data/source_bias_seed.csv",
+    "data/source_profiles.csv",
+    "docs/DATA_CONTRACTS.md",
+    "docs/HISTORICAL_RESEARCH.md",
+    "docs/SOURCES.md",
+    "examples/agents_demo.py",
+    "examples/capacity_estimate.py",
+    "examples/inputs/aliases.csv",
+    "examples/inputs/annotations.csv",
+    "examples/inputs/archive_articles.jsonl",
+    "examples/inputs/articles.csv",
+    "examples/inputs/backtest.csv",
+    "examples/inputs/candidates.csv",
+    "examples/inputs/extra_source_profiles.csv",
+    "examples/inputs/gold_labels.csv",
+    "examples/inputs/historical_bias_assessments.csv",
+    "examples/inputs/independent_bias_samples.jsonl",
+    "examples/inputs/outlets.csv",
+    "examples/inputs/pedigree.csv",
+    "examples/inputs/results.csv",
+    "examples/inputs/roster.csv",
+    "examples/inputs/rss_feeds.csv",
+    "examples/inputs/service_terms.csv",
+    "examples/inputs/surveys.csv",
+    "examples/inputs/terms.csv",
+    "examples/starter_outlets.csv",
+    "tests/conftest.py",
+    "tests/test_history_eval.py"
+  ],
+  "uploaded_source_catalog_matches_package": true,
+  "attachments": [
+    {
+      "name": "Midterm_Sentiment_Agents_Validation.md",
+      "sha256": "789987b926fa054e1f70df5c7ae4fdf979022e9a85a39aaac5f1b222f82b4eab",
+      "bytes": 5093
+    },
+    {
+      "name": "Midterm_Sentiment_Agents_README.md",
+      "sha256": "a5112e200fa98fe10ce37171848249dc0b66cad45665466f7ea77c8d2d31f20d",
+      "bytes": 11003
+    },
+    {
+      "name": "Midterm_Source_Catalog.csv",
+      "sha256": "9cf9b5f211fbc90a0f0976caf362671e2425e739e6559f900d35a1c1cc885b01",
+      "bytes": 22810
+    },
+    {
+      "name": "Midterm_Sentiment_Agents_Colab.ipynb",
+      "sha256": "7a201e3feee8d2ce924816c4cc32a9688e84a52ef5a1f32c6cdfa55ece97401c",
+      "bytes": 153893
+    }
+  ]
+}

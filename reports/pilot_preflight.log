@@ -1,0 +1,20 @@
+{
+  "started_at": "2026-10-07T00:24:48+00:00",
+  "network_requested": false,
+  "credential_present": false,
+  "http_attempts_before": 0,
+  "provider": "mediacloud",
+  "limits": {
+    "candidates": 24,
+    "total_requests": 20
+  },
+  "blockers": [
+    "Need 24 sourced congressional candidates; available: 0"
+  ],
+  "status": "blocked",
+  "selected_candidates": 0,
+  "http_attempts_total": 0,
+  "http_attempts_this_run": 0,
+  "finished_at": "2026-10-07T00:24:48+00:00",
+  "queue": []
+}

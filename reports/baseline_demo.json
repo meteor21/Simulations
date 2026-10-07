@@ -1,0 +1,20 @@
+[
+  {
+    "label": "SYNTHETIC ONLY",
+    "name": "Alex Rowan",
+    "office": "H",
+    "national": 80.0,
+    "local": 20.0,
+    "media_recency": 50.0,
+    "in_office": true
+  },
+  {
+    "label": "SYNTHETIC ONLY",
+    "name": "Jordan Vale",
+    "office": "S",
+    "national": 80.0,
+    "local": 20.0,
+    "media_recency": 50.0,
+    "in_office": true
+  }
+]

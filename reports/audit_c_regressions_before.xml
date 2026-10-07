@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="13" skipped="0" tests="14" time="1.399" timestamp="2026-10-07T00:17:32.227320+00:00" hostname="9017923f6b26"><testcase classname="tests.test_audit_analysis" name="test_masking_preserves_other_person_with_same_surname" time="0.001"><failure message="AssertionError: assert 'Sam Rowan was condemned' in 'Senator TARGET_CANDIDATE was praised. Rival Sam TARGET_CANDIDATE was condemned.'">def test_masking_preserves_other_person_with_same_surname():
+        text = 'Senator Alex Rowan was praised. Rival Sam Rowan was condemned.'
+        contexts, evidence = target_context(text, ['Alex Rowan'])
+        assert 'TARGET_CANDIDATE was praised' in contexts[0]
+&gt;       assert 'Sam Rowan was condemned' in contexts[0]
+E       AssertionError: assert 'Sam Rowan was condemned' in 'Senator TARGET_CANDIDATE was praised. Rival Sam TARGET_CANDIDATE was condemned.'
+
+tests/test_audit_analysis.py:37: AssertionError</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_empty_or_punctuation_alias_never_matches_every_position[aliases0]" time="0.000" /><testcase classname="tests.test_audit_analysis" name="test_empty_or_punctuation_alias_never_matches_every_position[aliases1]" time="0.000"><failure message="IndexError: list index out of range">aliases = ['']
+
+    @pytest.mark.parametrize('aliases', [[], [''], ['!!!']])
+    def test_empty_or_punctuation_alias_never_matches_every_position(aliases):
+&gt;       assert target_context('An unrelated article about a candidate.', aliases) == ([], '')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_audit_analysis.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+text = 'An unrelated article about a candidate.', aliases = ['']
+max_windows = 4, max_chars = 1500
+
+    def target_context(text,aliases,*,max_windows=4,max_chars=1500):
+        patterns=[re.compile(name_pattern(a),re.I) for a in sorted(aliases,key=len,reverse=True)]
+        hits=sorted({m.start() for p in patterns for m in p.finditer(text)})
+        if not hits: return [],''
+        windows=[]
+        for pos in hits:
+            if windows and pos&lt;windows[-1][1]: continue
+            windows.append((max(0,pos-300),min(len(text),pos+max_chars-300)))
+            if len(windows)&gt;=max_windows: break
+        originals=[text[a:b] for a,b in windows]
+        masked=[]
+        for s in originals:
+            for p in patterns: s=p.sub('TARGET_CANDIDATE',s)
+            # Surname replacement only AFTER establishing a full-name match in the document.
+            for alias in aliases:
+&gt;               last=alias.split()[-1]
+                     ^^^^^^^^^^^^^^^^^
+E               IndexError: list index out of range
+
+charisma_lab/annotate.py:32: IndexError</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_empty_or_punctuation_alias_never_matches_every_position[aliases2]" time="0.001"><failure message="AssertionError: assert (['An unrelat...a candidate.') == ([], '')&#10;  &#10;  At index 0 diff: ['An unrelated article about a candidate.TARGET_CANDIDATE'] != []&#10;  Use -v to get more diff">aliases = ['!!!']
+
+    @pytest.mark.parametrize('aliases', [[], [''], ['!!!']])
+    def test_empty_or_punctuation_alias_never_matches_every_position(aliases):
+&gt;       assert target_context('An unrelated article about a candidate.', aliases) == ([], '')
+E       AssertionError: assert (['An unrelat...a candidate.') == ([], '')
+E         
+E         At index 0 diff: ['An unrelated article about a candidate.TARGET_CANDIDATE'] != []
+E         Use -v to get more diff
+
+tests/test_audit_analysis.py:44: AssertionError</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_strict_unknown_identity_does_not_emit_component_features" time="0.007"><failure message="assert 80.0 is None">audit_db = &lt;charisma_lab.agents_store.AgentStore object at 0x7f1bc9717770&gt;
+
+    def test_strict_unknown_identity_does_not_emit_component_features(audit_db):
+        add_article(audit_db, 'national.example', 'n')
+        add_article(audit_db, 'local.example', 'l')
+        audit_db.con.execute("UPDATE cs_candidates SET known_at='2027-01-01T00:00:00+00:00'")
+        result = snapshot(audit_db, 'C1', '2026-10-06', state='MI', config=config())
+&gt;       assert result['national']['score'] is None
+E       assert 80.0 is None
+
+tests/test_audit_analysis.py:52: AssertionError</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_strict_state_inference_ignores_later_cycle_registration" time="0.004"><failure message="AssertionError: assert 'MI' is None">audit_db = &lt;charisma_lab.agents_store.AgentStore object at 0x7f1bc9725fa0&gt;
+
+    def test_strict_state_inference_ignores_later_cycle_registration(audit_db):
+        audit_db.con.execute('INSERT INTO cs_candidate_cycles VALUES(?,?,?,?,?,?,?,?,?,?)',
+                             ('C1', 2026, 'H', 'MI', '1', 'X', 2026, 'registry_only',
+                              '2027-01-01T00:00:00+00:00', 'synthetic://late-registry'))
+        add_article(audit_db, 'local.example', 'l')
+        result = snapshot(audit_db, 'C1', '2026-10-06', cycle=2026, config=config())
+&gt;       assert result['state'] is None
+E       AssertionError: assert 'MI' is None
+
+tests/test_audit_analysis.py:68: AssertionError</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_republished_duplicate_cannot_satisfy_recent_coverage" time="0.005"><failure message="assert 80.0 is None">audit_db = &lt;charisma_lab.agents_store.AgentStore object at 0x7f1bc97265d0&gt;
+
+    def test_republished_duplicate_cannot_satisfy_recent_coverage(audit_db):
+        body = 'Senator Alex Rowan discussed the campaign. ' * 20
+        add_article(audit_db, 'national.example', 'old', published='2026-01-01', body=body)
+        add_article(audit_db, 'national.example', 'copy-one', body=body)
+        add_article(audit_db, 'national.example', 'copy-two', body=body)
+        result = snapshot(audit_db, 'C1', '2026-10-06', state='MI',
+                          config=config(require_both_scopes=False, min_recent_articles=2))
+        assert result['national']['unique_text_clusters'] == 1
+&gt;       assert result['media_recency_score'] is None
+E       assert 80.0 is None
+
+tests/test_audit_analysis.py:80: AssertionError</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_negative_recent_coverage_requirement_rejected" time="0.000"><failure message="Failed: DID NOT RAISE ValueError">def test_negative_recent_coverage_requirement_rejected():
+&gt;       with pytest.raises(ValueError, match='min_recent_articles'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_audit_analysis.py:85: Failed</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_backtest_missing_temporal_or_race_identity_rejected[as_of]" time="0.930"><failure message="Failed: DID NOT RAISE ValueError">column = 'as_of'
+
+    @pytest.mark.parametrize('column', ['as_of', 'election_date', 'cycle', 'election_id'])
+    def test_backtest_missing_temporal_or_race_identity_rejected(column):
+        data = frame()
+        data.loc[0, column] = None
+&gt;       with pytest.raises(ValueError, match='missing|Missing'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_audit_analysis.py:101: Failed</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_backtest_missing_temporal_or_race_identity_rejected[election_date]" time="0.040"><failure message="Failed: DID NOT RAISE ValueError">column = 'election_date'
+
+    @pytest.mark.parametrize('column', ['as_of', 'election_date', 'cycle', 'election_id'])
+    def test_backtest_missing_temporal_or_race_identity_rejected(column):
+        data = frame()
+        data.loc[0, column] = None
+&gt;       with pytest.raises(ValueError, match='missing|Missing'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_audit_analysis.py:101: Failed</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_backtest_missing_temporal_or_race_identity_rejected[cycle]" time="0.043"><failure message="Failed: DID NOT RAISE ValueError">column = 'cycle'
+
+    @pytest.mark.parametrize('column', ['as_of', 'election_date', 'cycle', 'election_id'])
+    def test_backtest_missing_temporal_or_race_identity_rejected(column):
+        data = frame()
+        data.loc[0, column] = None
+&gt;       with pytest.raises(ValueError, match='missing|Missing'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_audit_analysis.py:101: Failed</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_backtest_missing_temporal_or_race_identity_rejected[election_id]" time="0.040"><failure message="Failed: DID NOT RAISE ValueError">column = 'election_id'
+
+    @pytest.mark.parametrize('column', ['as_of', 'election_date', 'cycle', 'election_id'])
+    def test_backtest_missing_temporal_or_race_identity_rejected(column):
+        data = frame()
+        data.loc[0, column] = None
+&gt;       with pytest.raises(ValueError, match='missing|Missing'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_audit_analysis.py:101: Failed</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_backtest_future_training_outcome_rejected" time="0.039"><failure message="Failed: DID NOT RAISE ValueError">def test_backtest_future_training_outcome_rejected():
+        data = frame()
+        data.loc[0, 'election_date'] = '2023-01-01'
+&gt;       with pytest.raises(ValueError, match='outcome|Outcome'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_audit_analysis.py:108: Failed</failure></testcase><testcase classname="tests.test_audit_analysis" name="test_backtest_target_cannot_be_used_as_a_feature" time="0.039"><failure message="Failed: DID NOT RAISE ValueError">def test_backtest_target_cannot_be_used_as_a_feature():
+&gt;       with pytest.raises(ValueError, match='feature|Feature'):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE ValueError
+
+tests/test_audit_analysis.py:113: Failed</failure></testcase></testsuite></testsuites>

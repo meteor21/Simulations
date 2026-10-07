@@ -1,0 +1,72 @@
+{
+  "method": "Original unmodified code cells executed in order, shared Python namespace, default settings",
+  "code_cells": 13,
+  "total_cells": 25,
+  "cells": [
+    {
+      "index": 1,
+      "status": "passed",
+      "seconds": 0.017
+    },
+    {
+      "index": 3,
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "index": 5,
+      "status": "passed",
+      "seconds": 0.368
+    },
+    {
+      "index": 6,
+      "status": "passed",
+      "seconds": 0.069
+    },
+    {
+      "index": 8,
+      "status": "passed",
+      "seconds": 0.004
+    },
+    {
+      "index": 9,
+      "status": "passed",
+      "seconds": 0.003
+    },
+    {
+      "index": 11,
+      "status": "passed",
+      "seconds": 0.076
+    },
+    {
+      "index": 13,
+      "status": "passed",
+      "seconds": 0.004
+    },
+    {
+      "index": 15,
+      "status": "passed",
+      "seconds": 0.001
+    },
+    {
+      "index": 17,
+      "status": "passed",
+      "seconds": 0.004
+    },
+    {
+      "index": 19,
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "index": 21,
+      "status": "passed",
+      "seconds": 0.0
+    },
+    {
+      "index": 23,
+      "status": "passed",
+      "seconds": 0.008
+    }
+  ]
+}

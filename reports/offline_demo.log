@@ -1,0 +1,4 @@
+candidate_id                     as_of  favorability_score  recency_score  pedigree_score  charisma_score  forecast_ready                                 dataset
+       SYN-A 2024-03-31T23:59:59+00:00           70.000000      80.000000       80.667087       76.889029           False SYNTHETIC; NOT REAL POLITICAL ESTIMATES
+       SYN-A 2024-10-01T23:59:59+00:00           45.284371      27.294089       80.667087       51.081849           False SYNTHETIC; NOT REAL POLITICAL ESTIMATES
+       SYN-B 2024-10-01T23:59:59+00:00                 NaN            NaN             NaN             NaN           False SYNTHETIC; NOT REAL POLITICAL ESTIMATES

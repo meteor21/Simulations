@@ -1,0 +1,13 @@
+{
+  "cycle": 2026,
+  "start": "2026-09-01",
+  "as_of": "2026-10-06",
+  "mode": "retrospective",
+  "required_candidates": 24,
+  "selected_candidates": 0,
+  "membership": "registration_discovery_only",
+  "status": "blocked_missing_candidate_registry",
+  "max_total_http_attempts": 20,
+  "plan": [],
+  "warning": "Media portrayal is not survey favorability. Missing is not neutral. This machinery pilot is not representative or forecast-ready."
+}

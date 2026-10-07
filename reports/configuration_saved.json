@@ -1,0 +1,23 @@
+{
+  "status": "saved",
+  "draft_fields": [
+    "install_script",
+    "start_skill",
+    "network.allowed_domains",
+    "secrets"
+  ],
+  "custom_destinations": [
+    "search.mediacloud.org",
+    "www.fec.gov"
+  ],
+  "credential_requirements": [
+    {
+      "name": "MEDIACLOUD_API_KEY",
+      "destination": "search.mediacloud.org",
+      "has_saved_binding": false
+    }
+  ],
+  "runtime_applied": false,
+  "published": false,
+  "fresh_task_validated": false
+}

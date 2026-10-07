@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "charisma-lab"
+version = "0.2.0"
+description = "Auditable, time-aware candidate standing research pipeline"
+requires-python = ">=3.11"
+dependencies = ["requests>=2.31,<3", "pandas>=2.1,<4", "numpy>=1.26,<3", "defusedxml>=0.7,<1", "PyYAML>=6,<7"]
+
+[project.optional-dependencies]
+scrape = ["trafilatura>=1.12,<3"]
+nlp = ["transformers>=4.44,<5", "torch>=2.2", "sentencepiece>=0.2", "protobuf>=4"]
+evaluate = ["scikit-learn>=1.4,<2"]
+dev = ["pytest>=8", "nbformat>=5", "nbclient>=0.10", "ipykernel>=6", "scikit-learn>=1.4,<2"]
+
+[project.scripts]
+charisma = "charisma_lab.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["charisma_lab*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
