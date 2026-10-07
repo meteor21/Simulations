@@ -1,0 +1,7 @@
+{
+  "format": "midterm-pilot-request-v1",
+  "request_id": "fec-verified-cdn-resume-2026-10-07",
+  "candidates": 24,
+  "max_total_provider_requests": 20,
+  "reason": "Resume the existing 2026 pilot after correcting the verified FEC production redirect. Previously spent requests remain charged."
+}
