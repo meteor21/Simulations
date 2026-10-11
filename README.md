@@ -7,12 +7,17 @@ Python files are the source of truth; regenerate/check Colab with
 `python scripts/sync_notebook.py` / `--check`. See `AGENTS.md` for setup and
 `docs/PILOT.md` for the persistent 24-candidate, 20-total-request pilot.
 
+**Visualizations:** [open the real pilot report](https://github.com/meteor21/Simulations/tree/analysis-dashboard)
+for coverage charts, the collection/review pipeline, request accounting and candidate
+evidence. The report branch also includes a self-contained interactive `index.html`.
+See [dashboard instructions](docs/DASHBOARD.md) for running, publishing and GitHub Pages.
+
 ## Three cooperating workers for US House/Senate research, 1990 onward
 Built for Mete's election simulator. The default target is the 2026 midterms. This package extends, rather than overwrites, Charisma Lab v0.1. Build date: October 6, 2026.
 
 **What has been delivered:** executable Python, a self-contained Colab notebook, a real 63-profile source directory, six sourced current political-orientation ratings, documented input contracts, synthetic integration tests and resumable workers.
 
-**What has not been delivered:** a populated nationwide candidate-news corpus or completed historical charisma scores. The original release reported failed live HTTP requests. The current audit made zero live data-provider requests because the Media Cloud credential and a sourced candidate registry are missing. API contracts were inspected in primary documentation; network responses and local neural inference were tested with fixtures, not live production requests. Surveys and historical archive texts require real data and permissions.
+**What has not been delivered:** a populated nationwide candidate-news corpus or completed historical charisma scores. The bounded real GitHub pilot collected 24 FEC registrations and 3 news URLs, using 16 of its 20 permitted provider requests. It has no reviewed candidate-specific sentiment labels; those scores remain missing. Saved-data analysis and real Colab import have passed on GitHub. Surveys and historical archive texts require additional sourced evidence and permissions; this small pilot does not validate sentiment accuracy or forecasting value.
 
 ## Start in Colab
 Upload `Midterm_Sentiment_Agents_Colab.ipynb`. Its first cell extracts the embedded package. No separate repository or code pasting is necessary. Defaults run without API credentials, using a clearly separated synthetic demonstration, and create the working source tables.

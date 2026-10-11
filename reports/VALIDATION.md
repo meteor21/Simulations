@@ -10,7 +10,7 @@ No earlier pass claim was accepted without rerunning its checks.
 |---|---|---|
 | Original recovered Python package | 116 passed, 0 failed, 0 skipped | `baseline_tests.xml`, `baseline_tests.log` |
 | Original offline notebook defaults | 13 code cells / 25 total, all executed in order in a shared Python namespace | `baseline_notebook.json` |
-| Corrected integrated suite | **267 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
+| Corrected integrated suite | **315 passed, 0 failed, 0 errors, 0 skipped** | `test_results.xml`, `test_results.log` |
 | Three-worker synthetic demonstration | Both invented candidates: national 80, local 20, media recency 50, in-office true | `agents_demo.json` |
 | Legacy synthetic offline demonstration | SYN-A standing 76.889029 → 51.081959; SYN-B stays missing | `offline_demo.log` |
 | Corrected notebook defaults | **14/14 code cells**, fresh Jupyter kernel, no errors, zero network attempts | `notebook_execution.json`, `notebook_validation.log` |
@@ -23,7 +23,7 @@ No earlier pass claim was accepted without rerunning its checks.
 | Retained real checkpoint analysis and notebook import | **Success**; 24 registrations, 3 URLs, 0 reviews; `analyzed_partial`, **0 new provider calls** | [Run 37683585456](https://github.com/meteor21/Simulations/actions/runs/37683585456), `live_pilot_result.json` |
 | Publisher scrape, downloaded neural inference, Colab Drive | **Not run / not validated** | Optional scope; reviewed labels remain missing |
 
-The new total includes 151 added regression cases. Existing assertions were not
+The new total includes 199 added regression cases. Existing assertions were not
 silently disabled: the old expectation permitting writes into unrelated databases
 was corrected to require refusal, and the old blanket-surname masking assertion
 was corrected to preserve a rival's identity. Synthetic annotation helpers now
@@ -297,3 +297,46 @@ labels. Two new transport-free regressions verify partial-panel success and that
 actual failed jobs still block. Authentication/acquisition errors and quota limits
 remain enforced. No additional collection run was launched to test this correction;
 the existing real checkpoint and original report are retained unchanged.
+
+## Public dashboard follow-up
+
+The public dashboard projects only the selected cohort from a retained real
+checkpoint. It exposes source geography, unreviewed search links, explicit missing
+scores, original cutoff, separate feature-lookback provenance, lookup outcomes and
+the preserved request allowance. It omits article titles/bodies, review evidence,
+credential fields, response text, unrelated identities and the raw database.
+No new provider requests or automatic sentiment labels are introduced.
+
+Actual commands executed in the same isolated Python environment:
+
+```bash
+python -m pytest tests/test_dashboard_data.py tests/test_dashboard.py tests/test_publish_dashboard.py
+# 48 passed: 19 projection, 5 rendering, 24 publication cases.
+python -m pytest --junitxml=reports/test_results.xml > reports/test_results.log 2>&1
+# 315 passed in 2.93s; no failures/errors/skips.
+node scripts/validate_dashboard.mjs --site /tmp/midterm-dashboard-fixture-7k2hfrj2/site --report artifacts/dashboard_browser_fixture.json --screenshots artifacts/dashboard-preview
+# 16 Chromium checks passed on an explicitly synthetic two-candidate fixture.
+```
+
+The projection tests exercise read-only deterministic access, selected-cohort and
+date filtering, URL sanitization, private-field exclusion, registry status,
+source/feature provenance, missingness and preservation of valid numeric zero.
+Rendering tests check HTML/Markdown injection boundaries, spreadsheet formula
+escaping, self-contained files and refusal to overwrite existing databases.
+Publication tests use mocked GitHub responses: owned branch verification, bounded
+payloads, preserved history, non-forced ref updates and one verified race retry.
+They do not themselves establish an external publication or Pages deployment.
+
+The browser tests execute the actual dashboard JavaScript, candidate/state filters,
+empty-state/detail views, source and scope switching, desktop/mobile layout and
+absence of external page requests. Managed Chromium refuses `file:` navigation;
+the test serves only the generated public files over loopback HTTP, matching a
+normal web deployment. No policy was disabled to read local files. These fixture
+checks are separate from the workflow's subsequent real-checkpoint browser check.
+
+`dashboard.yml` runs real saved-data analysis, browser checks and Colab import before
+publishing a rendered report and SVGs on `analysis-dashboard`. It deploys the
+interactive site only if Pages is already configured for GitHub Actions, and then
+verifies the served HTML. An absent Pages prerequisite is reported separately from
+the available rendered report. Actual run/deployment evidence is recorded in
+`DASHBOARD_RUN.md` after the GitHub run completes.

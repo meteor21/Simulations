@@ -163,3 +163,40 @@ and `executed_partial`, not a fatal collection error. Zero reviewed labels also
 remains explicit. Failed/blocked jobs, access denial, invalid input and exhausted
 quota still block. Do not rerun live collection merely to obtain a green status;
 use the zero-request checkpoint analysis for partial saved data.
+
+## Public visualizations and deployment
+
+The user authorized running and publishing the saved real analysis on GitHub.
+`dashboard.yml` analyzes one exact retained collection, builds public visualizations,
+checks desktop/mobile browser behavior and Colab import, and publishes an owned
+`analysis-dashboard` branch. Trigger it manually or with an explicit
+`.github/dashboard-request.json` change. Ordinary code pushes do not collect data
+or redeploy. No provider key is supplied; the original 20-request allowance remains.
+
+Public exports include only selected candidate identities, dated source geography,
+safe publisher URL metadata, coverage/missingness, and counters. Exclude article
+titles/bodies, review excerpts, private metadata, credentials and SQLite. Search
+associations are unverified; source geography does not prove district readership.
+Preserve registration status, missing/null scores, original dates and separate
+feature lookback provenance. No inferred political-orientation ratings are shown.
+
+```bash
+python -m pytest tests/test_dashboard_data.py tests/test_dashboard.py tests/test_publish_dashboard.py
+# After the existing retained-checkpoint analysis has produced this directory:
+python -m charisma_lab.dashboard --pilot artifacts/analyzed-pilot --output artifacts/dashboard --repository meteor21/Simulations --analysis-run-id RUN_ID --code-revision COMMIT_SHA
+node scripts/validate_dashboard.mjs --site artifacts/dashboard --report artifacts/dashboard_browser.json --screenshots artifacts/dashboard-screenshots
+# Publication only in an authorized GitHub runtime with its injected token:
+python scripts/publish_dashboard.py --site artifacts/dashboard --report artifacts/dashboard_publication.json
+```
+
+The browser check requires Node 24 and Chromium/Google Chrome (`CHROMIUM_PATH` may
+select the executable). It serves only generated public files on loopback for the
+internal test; no browser-preview service is deployed from this cloud environment.
+Generated SVG charts and README render directly on GitHub. The self-contained HTML
+adds candidate filters/details and can also be hosted on GitHub Pages.
+
+GitHub Pages must already use **Source: GitHub Actions** to deploy with the normal
+workflow token. Its status is checked, never assumed. The workflow publishes the
+visual report before reporting a missing Pages prerequisite. Do not claim a Pages
+URL is live until the deploy job verifies it. Never reset the budget or enable a
+new provider crawl to obtain a dashboard. See `docs/DASHBOARD.md`.

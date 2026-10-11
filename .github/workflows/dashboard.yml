@@ -1,0 +1,175 @@
+name: Publish real analysis dashboard
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Saved real collection run to analyze (no new provider calls)
+        required: true
+        default: "37680664034"
+        type: string
+  push:
+    branches: [main]
+    paths: [.github/dashboard-request.json]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: midterm-live-pilot-2026
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      actions: read
+      pages: read
+    outputs:
+      pages_ready: ${{ steps.pages.outputs.ready }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements-dev.lock
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+      - name: Install tested analysis environment
+        run: python -m pip install -r requirements-dev.lock -e '.[dev]'
+      - name: Verify dashboard data and publication boundaries
+        run: |
+          python scripts/sync_notebook.py --check
+          python -m pytest tests/test_dashboard_data.py tests/test_dashboard.py tests/test_publish_dashboard.py
+      - name: Run real analysis from the retained checkpoint
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess, sys
+          from pathlib import Path
+          source = os.environ.get('SOURCE_RUN_ID', '')
+          if os.environ.get('GITHUB_EVENT_NAME') == 'push':
+              request = json.loads(Path('.github/dashboard-request.json').read_text())
+              if request.get('format') != 'midterm-dashboard-request-v1':
+                  raise SystemExit('An explicit dashboard publication request is required.')
+              source = str(request.get('source_run_id', ''))
+          if not source or not source.isascii() or not source.isdecimal():
+              raise SystemExit('A numeric retained collection run is required.')
+          subprocess.run([sys.executable, 'scripts/analyze_github_pilot.py', '--source-run-id', source,
+                          '--output', 'artifacts/analyzed-pilot', '--bundle', 'artifacts/real-analysis.zip'], check=True)
+          PY
+      - name: Build public visualizations and candidate tables
+        run: python -m charisma_lab.dashboard --pilot artifacts/analyzed-pilot --output artifacts/dashboard
+      - name: Check real dashboard in desktop and mobile Chromium
+        env:
+          CHROMIUM_PATH: /usr/bin/google-chrome
+        run: node scripts/validate_dashboard.mjs --site artifacts/dashboard --report artifacts/dashboard_browser.json --screenshots artifacts/dashboard-screenshots
+      - name: Verify real results import in Colab
+        run: python scripts/validate_notebook.py --results-bundle artifacts/real-analysis.zip --report artifacts/real_notebook_import.json
+      - name: Publish the visual report on GitHub
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/publish_dashboard.py --site artifacts/dashboard --report artifacts/dashboard_publication.json
+      - name: Check GitHub Pages configuration
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          from pathlib import Path
+          sys.path.insert(0, 'scripts')
+          from publish_dashboard import api, GitHubApiError
+          repository = os.environ['GITHUB_REPOSITORY']
+          try:
+              settings = api('GET', f'repos/{repository}/pages')
+              ready = settings.get('build_type') == 'workflow'
+              reason = 'ready' if ready else 'Pages source is not GitHub Actions'
+          except GitHubApiError as error:
+              if error.status not in {403, 404}: raise
+              ready = False
+              reason = 'Pages is not enabled' if error.status == 404 else 'Pages configuration is inaccessible to the workflow token'
+          with Path(os.environ['GITHUB_OUTPUT']).open('a') as stream:
+              stream.write(f'ready={str(ready).lower()}\n')
+          report = {'ready': ready, 'reason': reason, 'settings_url': f'https://github.com/{repository}/settings/pages'}
+          Path('artifacts/pages_readiness.json').write_text(json.dumps(report, indent=2))
+          if not ready:
+              print('::notice title=Interactive site needs Pages configuration::' + reason +
+                    '. The visual report is already published. Set Settings / Pages / Source to GitHub Actions, then run this workflow again. ' + report['settings_url'])
+          PY
+      - name: Package the interactive Pages site
+        if: steps.pages.outputs.ready == 'true'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: artifacts/dashboard
+      - name: Keep dashboard, real-data exports, and validation evidence
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: midterm-dashboard-${{ github.run_id }}
+          path: |
+            artifacts/dashboard/
+            artifacts/dashboard-screenshots/
+            artifacts/real-analysis.zip
+            artifacts/analyzed-pilot/analysis_report.json
+            artifacts/dashboard_browser.json
+            artifacts/real_notebook_import.json
+            artifacts/dashboard_publication.json
+            artifacts/pages_readiness.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 14
+      - name: Record published analysis links
+        if: success()
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          result = json.loads(Path('artifacts/dashboard_publication.json').read_text())
+          data = json.loads(Path('artifacts/dashboard/data.json').read_text())
+          with Path(os.environ['GITHUB_STEP_SUMMARY']).open('a') as summary:
+              summary.write(f"## Published real-data visual report\n\n[Open the visualizations]({result['rendered_report_url']})\n\n")
+              summary.write(f"{data['summary']['selected_candidates']} registrations; {data['summary']['article_urls']} saved URLs; {data['summary']['reviewed_annotations']} reviewed labels.\n\n")
+              summary.write('Analysis and publication made **zero new provider requests**. Missing sentiment remains missing.\n')
+          PY
+
+  deploy:
+    if: needs.build.outputs.pages_ready == 'true'
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the interactive dashboard
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1
+      - name: Verify the published page serves the dashboard
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          python3 - <<'PY'
+          import os, time, urllib.request
+          url = os.environ['PAGE_URL']
+          for attempt in range(6):
+              try:
+                  with urllib.request.urlopen(url, timeout=20) as response:
+                      content = response.read(2_000_000).decode('utf-8')
+                  if 'Media Observatory' not in content or 'dashboard-data' not in content:
+                      raise ValueError('Published page did not contain this dashboard')
+                  print('::notice title=Interactive dashboard deployed and verified::' + url)
+                  break
+              except Exception:
+                  if attempt == 5: raise
+                  time.sleep(5)
+          PY

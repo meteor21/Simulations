@@ -22,7 +22,7 @@ def source_files():
     # Workflow regression tests execute the embedded inline Python steps too.
     files += [p for p in (ROOT / '.github/workflows').glob('*.yml') if p.is_file()]
     # The retained-checkpoint regression tests import this offline analysis helper.
-    files += [ROOT / 'scripts/analyze_github_pilot.py']
+    files += [ROOT / 'scripts/analyze_github_pilot.py', ROOT / 'scripts/publish_dashboard.py']
     return sorted(files)
 
 
