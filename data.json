@@ -1,0 +1,1388 @@
+{
+  "articles": [
+    {
+      "article_id": "440f7cbc5aedf863a840bbde5fca5478f041106d52f3720b9e1999d07fe5dcd4",
+      "association_status": "unreviewed_search_association",
+      "candidate_ids": [
+        "S6AK00268",
+        "S6AK00284",
+        "S6AK00292",
+        "S6AK00318",
+        "S6AL00435",
+        "S6AL00534",
+        "S6AR00199",
+        "S8AK00066"
+      ],
+      "domain": "foxnews.com",
+      "historical_scope_verified": false,
+      "published_at": "2026-09-02T23:59:59+00:00",
+      "scope": "national",
+      "url": "https://www.foxnews.com/politics/dem-senate-nominee-changes-tune-ice-after-vowing-not-one-more-dime-agency"
+    },
+    {
+      "article_id": "d709a6163d8b73b385f45dc2c2efd9b543aa615a698aef5df5cb20c64a120738",
+      "association_status": "unreviewed_search_association",
+      "candidate_ids": [
+        "H2AK00143",
+        "H2AK00556",
+        "H2AK01083",
+        "H4AL02139",
+        "H4AR03081",
+        "H6AK01068",
+        "H6AK01092",
+        "H6AK01118"
+      ],
+      "domain": "foxnews.com",
+      "historical_scope_verified": false,
+      "published_at": "2026-09-16T23:59:59+00:00",
+      "scope": "national",
+      "url": "https://www.foxnews.com/politics/dems-boost-convicted-far-left-candidate-reigniting-tensions-inside-party"
+    },
+    {
+      "article_id": "0ff7dafb7b7cdb7517c171a2bd9d383f2ea618b0d8348da6fd5bbba93b7337d7",
+      "association_status": "unreviewed_search_association",
+      "candidate_ids": [
+        "S6AK00268",
+        "S6AK00284",
+        "S6AK00292",
+        "S6AK00318",
+        "S6AL00435",
+        "S6AL00534",
+        "S6AR00199",
+        "S8AK00066"
+      ],
+      "domain": "foxnews.com",
+      "historical_scope_verified": false,
+      "published_at": "2026-09-22T23:59:59+00:00",
+      "scope": "national",
+      "url": "https://www.foxnews.com/politics/red-state-dem-faces-fury-suggesting-illegal-aliens-should-replace-american-workers"
+    }
+  ],
+  "budget": {
+    "limit": 20,
+    "provider_requests_this_analysis": 0,
+    "remaining": 4,
+    "used": 16
+  },
+  "candidates": [
+    {
+      "article_count": 1,
+      "candidate_id": "H2AK00143",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Jim C Mcdermott",
+      "office": "H",
+      "party": "LIB",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H2AK00556",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "David Ambrose",
+      "office": "H",
+      "party": "N",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H2AK01083",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Nicholas Iii Begich",
+      "office": "H",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H4AL02139",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "02",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Hampton Harris",
+      "office": "H",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H4AR03081",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "03",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Bobby Wilson",
+      "office": "H",
+      "party": "LIB",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H6AK01068",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "John Brendan Williams",
+      "office": "H",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H6AK01092",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Bill Hill",
+      "office": "H",
+      "party": "IND",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H6AK01118",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Melanie A. Salazar",
+      "office": "H",
+      "party": "NON",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AK01134",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "David Ii Ambrose",
+      "office": "H",
+      "party": "UN",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AL04171",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "04",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Lee Jeh Cobb",
+      "office": "H",
+      "party": "W",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AL05277",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "05",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Crystal I Mrs Ball",
+      "office": "H",
+      "party": "NNE",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AL06143",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "06",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Keith Ross Pilkington",
+      "office": "H",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AL06176",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "06",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "William Karl Mr. Iv Puetz",
+      "office": "H",
+      "party": "IND",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AR02278",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "02",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Chase Mcdowell",
+      "office": "H",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AR02294",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "02",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Zackary Blake Huffman",
+      "office": "H",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AR03144",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "03",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Christopher John Mr. Ii Hocevar",
+      "office": "H",
+      "party": "IND",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AK00268",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Dustin Thomas House Darden",
+      "office": "S",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AK00284",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Carol Hafner",
+      "office": "S",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AK00292",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Heather G Mcelwain",
+      "office": "S",
+      "party": "LP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AK00318",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Reece Roberts",
+      "office": "S",
+      "party": "NON",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AL00435",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Kyle Sweetser",
+      "office": "S",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AL00534",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Gavin Solomon",
+      "office": "S",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AR00199",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Hallie Shoffner",
+      "office": "S",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S8AK00066",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Scott A. Kohlhaas",
+      "office": "S",
+      "party": "LIB",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    }
+  ],
+  "checkpoint_counts": {
+    "article_urls": 3,
+    "candidate_article_links": 24,
+    "reviewed_annotations": 0
+  },
+  "collection": {
+    "blocked_jobs": 0,
+    "failed_jobs": 0,
+    "processed_hits": 3,
+    "processed_jobs": 6
+  },
+  "count_scope": "Summary and scope counts include only selected-cohort search associations with public publisher URLs and publication dates in the original collection window; checkpoint_counts describes the whole saved database.",
+  "coverage": {
+    "local": 0,
+    "metro": 0,
+    "national": 3,
+    "state": 0,
+    "unknown": 0
+  },
+  "coverage_note": "Candidate coverage counts describe source geography for saved search associations; they do not establish a verified mention, candidate-state relevance, or district readership. Feature lookback windows are reported separately from metadata counts.",
+  "current_status": "analyzed_partial",
+  "dataset_kind": "real",
+  "original_status": "blocked",
+  "provenance": {
+    "analysis_run_id": 38097810150,
+    "code_revision": "b8ace01b1787850a6ff3eb898075457aa8330f20",
+    "collection_code_revision": "8041f94b9ac8b803e228c86d3f89b2461c479215",
+    "source_repository": "meteor21/Simulations",
+    "source_run_id": 37680664034
+  },
+  "schema_version": 1,
+  "sources": [
+    {
+      "domain": "alabamareflector.com",
+      "evidence_url": "https://statesnewsroom.com/newsrooms/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "b98c530cc243f393ddb848821c3b80b996ad1a3de7cd2a8ce031c7af99ea3cec",
+      "resolution_status": "not_found",
+      "scope": "state",
+      "source_id": null,
+      "states": [
+        "AL"
+      ],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "alaskabeacon.com",
+      "evidence_url": "https://statesnewsroom.com/newsrooms/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "a052291579dd5284ed37609e0e0dc617b2d3865f4d1ce81b75c5258b52bcc475",
+      "resolution_status": "not_found",
+      "scope": "state",
+      "source_id": null,
+      "states": [
+        "AK"
+      ],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "apnews.com",
+      "evidence_url": "https://www.allsides.com/news-source/associated-press-media-bias",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "7791c9d5bfcb02df97d2264b1bbc2110c27d5e9116ddd83a8213a1d258b7d75b",
+      "resolution_status": "exact_root_homepage_match",
+      "scope": "national",
+      "source_id": 106145,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "arkansasadvocate.com",
+      "evidence_url": "https://statesnewsroom.com/newsrooms/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "df7583e4e77b7ee5e24e1ac555c6d4bb5e6970247b27973ad91e62648ac20417",
+      "resolution_status": "not_found",
+      "scope": "state",
+      "source_id": null,
+      "states": [
+        "AR"
+      ],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "cnn.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "d3b0a89641d1f9cd65dcfacc970117210a13fee8daecc7d1769c72c29c1a8400",
+      "resolution_status": "exact_root_homepage_match",
+      "scope": "national",
+      "source_id": 1095,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "foxnews.com",
+      "evidence_url": "https://www.allsides.com/news-source/fox-news-media-bias",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "83c46be1a6b09522a727c709995f5c32e3ad11fcd5e95a4eebbcb69614edd228",
+      "resolution_status": "exact_root_homepage_match",
+      "scope": "national",
+      "source_id": 1092,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "nationalreview.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "67f5dae70b98e6673380c6960bbf65404cf2d382f2edbcb3b4208f59741cdac1",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "npr.org",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "06d7136fd98b5a3f78579af406105aaadc5ae75de4f69d6766809f46666c50d8",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "nytimes.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "edf7b0b9fe67c77ea88ba02af3881822e10886c1293419909c07e0047f8d73aa",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "politico.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "1dc0aa5dc28f2025dca4d1902bf3dfd4cb18f52a8ebc9f6bb3e32129e038df9d",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "reuters.com",
+      "evidence_url": "https://www.allsides.com/news-source/reuters-media-bias",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "936cd8e4424c3c6a539174b7ce2fb7c2172eb48b4db7a5db086df101dc1d133c",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "stateline.org",
+      "evidence_url": "https://statesnewsroom.com/newsrooms/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "39775d9c456a6510889ba8ea0250a00869cbd03a09b5d26f6af237117013f210",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "thehill.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "febce8dcdbeb35afb1312fd027501cb2467c388698ed6b36af62c21e65818d14",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "washingtonexaminer.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "01c354f7464322f6e56f7fb7eb92a0f1d358d2e53d2fd8c3fe845b314935bf68",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "wsj.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "67a6d2189c9613996eecc2edca321d93848e86974ce4d676bddf4881a3e80eb7",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    }
+  ],
+  "summary": {
+    "article_urls": 3,
+    "candidate_article_links": 24,
+    "candidates_with_scores": 0,
+    "retrospective_scope_urls": 3,
+    "reviewed_annotations": 0,
+    "selected_candidates": 24
+  },
+  "warnings": {
+    "current": [
+      "No reviewed candidate-specific sentiment annotations; scores remain missing",
+      "Source coverage remains incomplete; this analysis does not fill missing coverage"
+    ],
+    "original": [
+      "Source panel incomplete; inspect source_resolution and collection_plan"
+    ],
+    "research": [
+      "Media portrayal is not representative public opinion; survey favorability remains separate.",
+      "Registrations are not verified contestants; search associations are not verified candidate mentions.",
+      "Missing sentiment is unavailable, not neutral. Partisanship carries no sentiment-weight penalty.",
+      "Retrospective reconstruction is not a point-in-time forecast; source coverage is incomplete.",
+      "Public export contains article metadata only; original publisher text and review evidence are omitted."
+    ]
+  },
+  "window": {
+    "as_of": "2026-10-06",
+    "cycle": 2026,
+    "mode": "retrospective",
+    "start": "2026-09-01"
+  }
+}

@@ -1,0 +1,25 @@
+candidate_id,name,office,state,district,party,roster_status,search_linked_urls,national_urls,state_urls,metro_urls,local_urls,unknown_urls,reviewed_annotations,media_recency_score,national_score,subnational_score,as_of,mode
+H2AK00143,Jim C Mcdermott,H,AK,00,LIB,registry_only,1,1,0,0,0,0,0,,,,2026-10-06,retrospective
+H2AK00556,David Ambrose,H,AK,00,N,registry_only,1,1,0,0,0,0,0,,,,2026-10-06,retrospective
+H2AK01083,Nicholas Iii Begich,H,AK,00,REP,registry_only,1,1,0,0,0,0,0,,,,2026-10-06,retrospective
+H4AL02139,Hampton Harris,H,AL,02,REP,registry_only,1,1,0,0,0,0,0,,,,2026-10-06,retrospective
+H4AR03081,Bobby Wilson,H,AR,03,LIB,registry_only,1,1,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AK01068,John Brendan Williams,H,AK,00,DEM,registry_only,1,1,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AK01092,Bill Hill,H,AK,00,IND,registry_only,1,1,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AK01118,Melanie A. Salazar,H,AK,00,NON,registry_only,1,1,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AK01134,David Ii Ambrose,H,AK,00,UN,registry_only,0,0,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AL04171,Lee Jeh Cobb,H,AL,04,W,registry_only,0,0,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AL05277,Crystal I Mrs Ball,H,AL,05,NNE,registry_only,0,0,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AL06143,Keith Ross Pilkington,H,AL,06,DEM,registry_only,0,0,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AL06176,William Karl Mr. Iv Puetz,H,AL,06,IND,registry_only,0,0,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AR02278,Chase Mcdowell,H,AR,02,REP,registry_only,0,0,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AR02294,Zackary Blake Huffman,H,AR,02,DEM,registry_only,0,0,0,0,0,0,0,,,,2026-10-06,retrospective
+H6AR03144,Christopher John Mr. Ii Hocevar,H,AR,03,IND,registry_only,0,0,0,0,0,0,0,,,,2026-10-06,retrospective
+S6AK00268,Dustin Thomas House Darden,S,AK,00,REP,registry_only,2,2,0,0,0,0,0,,,,2026-10-06,retrospective
+S6AK00284,Carol Hafner,S,AK,00,DEM,registry_only,2,2,0,0,0,0,0,,,,2026-10-06,retrospective
+S6AK00292,Heather G Mcelwain,S,AK,00,LP,registry_only,2,2,0,0,0,0,0,,,,2026-10-06,retrospective
+S6AK00318,Reece Roberts,S,AK,00,NON,registry_only,2,2,0,0,0,0,0,,,,2026-10-06,retrospective
+S6AL00435,Kyle Sweetser,S,AL,00,DEM,registry_only,2,2,0,0,0,0,0,,,,2026-10-06,retrospective
+S6AL00534,Gavin Solomon,S,AL,00,REP,registry_only,2,2,0,0,0,0,0,,,,2026-10-06,retrospective
+S6AR00199,Hallie Shoffner,S,AR,00,DEM,registry_only,2,2,0,0,0,0,0,,,,2026-10-06,retrospective
+S8AK00066,Scott A. Kohlhaas,S,AK,,LIB,registry_only,2,2,0,0,0,0,0,,,,2026-10-06,retrospective

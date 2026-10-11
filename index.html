@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Explore the evidence, coverage gaps and review status of the Midterm Sentiment Agents pilot.">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Midterm / Media Observatory</title>
+<style>
+:root{--ink:#152b32;--muted:#587077;--line:#dce5e4;--paper:#f5f7f6;--teal:#187e75;--mint:#dcefe9;--amber:#8c5b1d;--amber-bg:#fff3dc;--white:#fff;--shadow:0 8px 32px #203d3a06}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--teal);text-underline-offset:3px}button,input,select{font:inherit}button,a,input,select{outline-offset:4px}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #72b8ae}button:disabled{cursor:default}svg{display:block}h1,h2,h3,p{margin:0}h1{font-size:clamp(32px,4vw,50px);line-height:1.12;letter-spacing:-1.8px;font-weight:640}h2{font-size:21px;line-height:1.3;letter-spacing:-.45px}h3{font-size:16px;font-weight:650}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-variant-numeric:tabular-nums}.muted{color:var(--muted)}.small{font-size:12px}.eyebrow{text-transform:uppercase;letter-spacing:1.6px;font-size:10px;font-weight:750}.wrap{max-width:1280px;margin:auto;padding:0 40px}.topbar{background:#132e35;color:#fff}.topline{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;font-size:15px;letter-spacing:.5px;font-weight:650;color:white;text-decoration:none}.brandmark{width:31px;height:31px;border:1px solid #62918e;border-radius:8px;display:grid;place-items:center}.brandmark span{width:13px;height:13px;border:2px solid #a8ddcd;transform:rotate(45deg)}.brand small{display:block;font-size:10px;letter-spacing:2.2px;color:#99b9ba;font-weight:500}.topnav{display:flex;gap:27px;align-items:center}.topnav a{font-size:12px;color:#c5d7d7;text-decoration:none}.topnav a:hover{color:#fff}.cycle{border:1px solid #547473;border-radius:20px;padding:4px 12px;color:#c4e0d8;font-size:11px}.hero{padding:43px 0 29px;display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}.hero .eyebrow{color:var(--teal);margin-bottom:11px}.hero p{max-width:680px;margin-top:14px;color:var(--muted);font-size:14px}.hero-actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);border-radius:7px;padding:9px 14px;background:#fff;color:var(--ink);text-decoration:none;font-size:12px;font-weight:650;white-space:nowrap}.btn.primary{background:var(--teal);color:white;border-color:var(--teal)}.btn:hover{filter:brightness(.97)}.status-strip{display:flex;justify-content:space-between;align-items:center;gap:20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 0;margin-bottom:24px;font-size:12px}.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;border-radius:5px;background:#edf2f1;color:#526970;font-size:11px;font-weight:600}.pill.amber{background:var(--amber-bg);color:var(--amber)}.pill.green{background:var(--mint);color:#166a5d}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}.stat{border:1px solid var(--line);border-radius:10px;background:white;padding:20px 23px;box-shadow:var(--shadow)}.stat-top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:650;color:var(--muted)}.stat-value{font-size:39px;font-weight:650;line-height:1.3;letter-spacing:-1.3px;margin:8px 0 3px}.stat-note{font-size:11px;color:var(--muted)}.stat .status-icon{width:23px;height:23px;border-radius:6px;background:var(--paper);display:grid;place-items:center;font-size:12px}.stat .missing{color:var(--amber)}.panel{background:#fff;border:1px solid var(--line);border-radius:11px;box-shadow:var(--shadow);padding:25px;margin-bottom:20px}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;margin-bottom:23px}.panel-head p{font-size:12px;color:var(--muted);margin-top:5px}.grid-main{display:grid;grid-template-columns:1.75fr 1fr;gap:20px}.scope-tabs{display:inline-flex;border:1px solid var(--line);border-radius:6px;padding:3px;background:#f7f9f8;gap:2px}.scope-tabs button{border:0;background:transparent;padding:5px 10px;border-radius:4px;font-size:11px;color:var(--muted)}.scope-tabs button[aria-pressed=true]{background:white;box-shadow:0 1px 4px #102b3014;color:var(--ink);font-weight:650}.bars{display:flex;flex-direction:column;gap:20px;padding:3px 0 13px}.bar-row{display:grid;grid-template-columns:71px minmax(20px,1fr) 25px;gap:13px;align-items:center;font-size:12px}.bar-track{height:22px;border-radius:4px;background:#f0f4f3;position:relative}.bar-fill{height:100%;min-width:0;border-radius:4px;background:var(--teal);transition:width .22s ease}.bar-empty{position:absolute;top:1px;left:10px;color:#7a8c90;font-size:10px;line-height:20px}.chart-note{font-size:11px;color:var(--muted);border-top:1px solid #edf1f0;padding-top:13px;line-height:1.65}.budget-layout{display:flex;gap:22px;align-items:center;margin:4px 0 19px}.ring{width:132px;flex:0 0 132px;position:relative}.ring svg{width:132px;height:132px;transform:rotate(-90deg)}.ring-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.ring-center strong{font-size:30px;line-height:1.15;letter-spacing:-1px}.ring-center span{font-size:11px;color:var(--muted)}.budget-detail .line{display:flex;align-items:center;gap:7px;font-size:12px;margin:7px 0}.swatch{width:8px;height:8px;background:var(--teal);border-radius:2px}.swatch.gray{background:#e8efed}.quiet-note{padding:11px 12px;border-radius:6px;background:#f3f8f6;font-size:11px;color:#426b61}.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.stage{padding:16px;border:1px solid #e4eae8;background:#f9fbfa;border-radius:7px;position:relative}.stage:after{content:'›';position:absolute;right:-11px;top:28px;color:#96a9a8;font-size:20px;z-index:1}.stage:last-child:after{content:none}.stage .step{color:#758b8e;font-size:9px;letter-spacing:1.1px;text-transform:uppercase}.stage strong{display:block;font-size:26px;font-weight:650;line-height:1.6}.stage p{font-size:11px;color:var(--muted)}.stage.pending{background:#fffaf0;border-color:#f1e5cd}.stage.pending strong{color:var(--amber)}.filters{display:flex;gap:10px;align-items:center;margin-bottom:15px;flex-wrap:wrap}.search{position:relative;flex:1;min-width:180px}.search input{width:100%;border:1px solid var(--line);border-radius:6px;background:#fafcfb;padding:9px 12px;font-size:12px;color:var(--ink)}select{border:1px solid var(--line);border-radius:6px;background:#fff;padding:9px 28px 9px 11px;font-size:12px;color:var(--ink);max-width:100%}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}th{font-size:9px;color:#6c8287;letter-spacing:.8px;text-transform:uppercase;padding:11px 12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#f9fbfa;white-space:nowrap}td{padding:12px;border-bottom:1px solid #edf1f0;vertical-align:middle}.candidate-name{font-weight:650;max-width:250px;display:block;line-height:1.35}.candidate-id{display:block;font-size:10px;color:#74888b;margin-top:3px}.candidate-open{border:0;background:none;text-align:left;padding:0;color:var(--ink)}.candidate-open:hover .candidate-name{text-decoration:underline;text-underline-offset:3px}.scope-cells{display:flex;gap:4px}.scope-count{width:25px;padding:3px 0;display:inline-block;text-align:center;background:#eff3f2;color:#8a9b9d;border-radius:3px;font-size:10px}.scope-count.observed{background:#e3f1eb;color:#1c776c;font-weight:700}.score-missing{font-size:11px;color:#7a6749;white-space:nowrap}.legend{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:10px;color:var(--muted)}.table-footer{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-top:15px;font-size:11px;color:var(--muted)}.candidate-detail{margin-top:15px;border:1px solid #cfdfda;border-radius:8px;padding:18px;background:#f5faf7}.detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.close{background:none;border:0;font-size:19px;color:var(--muted);line-height:1}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:13px;font-size:12px}.detail-grid ul{padding-left:17px;margin:4px 0}.detail-grid li{margin:4px 0}.detail-grid a{overflow-wrap:anywhere}.details-meta{font-size:11px;color:var(--muted);margin-top:4px}.source-list{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.source-card{border:1px solid #e2e9e6;border-radius:7px;padding:15px}.source-card .domain{font-weight:650;font-size:12px;overflow-wrap:anywhere}.source-card .source-meta{font-size:10px;color:var(--muted);margin:7px 0}.source-card .pill{font-size:10px}.source-card details{font-size:10px;color:var(--muted);margin-top:10px}.source-card summary{cursor:pointer;color:#587877}.source-card details p{margin-top:5px;overflow-wrap:anywhere}.source-card .source-evidence{display:block;margin-top:5px}.sources-foot{margin-top:15px;font-size:11px;color:var(--muted)}.methods{display:grid;grid-template-columns:repeat(3,1fr);gap:25px}.method-index{font-size:10px;color:var(--teal);font-weight:700;margin-bottom:8px;letter-spacing:1px}.methods h3{font-size:14px;margin-bottom:6px}.methods p{font-size:12px;color:var(--muted)}.evidence-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;padding-top:17px;border-top:1px solid var(--line);font-size:11px}.footer{display:flex;justify-content:space-between;gap:20px;padding:9px 0 32px;color:#6e8387;font-size:10px}.empty-state{text-align:center;padding:30px;color:var(--muted)}.noscript{padding:20px;background:var(--amber-bg)}[hidden]{display:none!important}.skip-link{position:absolute;left:-9999px;top:10px}.skip-link:focus{left:20px;z-index:10;background:white;padding:10px}
+@media(max-width:1050px){.hero{grid-template-columns:1fr}.hero-actions{justify-content:flex-start}.grid-main{grid-template-columns:1.45fr 1fr}.budget-layout{gap:10px}.ring{flex-basis:110px;width:110px}.ring svg{width:110px;height:110px}.source-list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.wrap{padding:0 18px}.topline{min-height:67px}.topnav{gap:13px}.topnav a{font-size:11px}.topnav a:nth-child(3),.cycle{display:none}.brand{font-size:12px}.brand small{font-size:8px}.hero{padding:29px 0 22px;gap:18px}.hero p{font-size:12px}.status-strip{align-items:flex-start;flex-direction:column;gap:7px;font-size:11px}.stats{grid-template-columns:repeat(2,1fr);gap:10px}.stat{padding:15px}.stat-value{font-size:33px}.stat-top{font-size:10px}.stat-note{font-size:10px}.grid-main{grid-template-columns:1fr;gap:0}.panel{padding:18px}.panel-head{gap:12px;flex-wrap:wrap;margin-bottom:18px}h2{font-size:19px}.pipeline{grid-template-columns:repeat(2,1fr);gap:8px}.stage{padding:12px}.stage:last-child{grid-column:1/-1}.stage:after{content:none}.source-list{grid-template-columns:1fr}.methods{grid-template-columns:1fr;gap:18px}.footer,.table-footer{flex-direction:column;align-items:flex-start;gap:7px}.detail-grid{grid-template-columns:1fr;gap:13px}.budget-layout{gap:25px}.ring{flex-basis:132px;width:132px}.ring svg{width:132px;height:132px}.filters select{flex:1}.filters .search{flex-basis:100%}.scope-tabs button{font-size:10px;padding:5px 8px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar-fill{transition:none}}
+</style>
+</head>
+<body>
+<a href="#overview" class="skip-link">Skip to analysis</a>
+<header class="topbar"><div class="wrap topline"><a class="brand" href="#overview"><span class="brandmark" aria-hidden="true"><span></span></span><span>MIDTERM<small>MEDIA OBSERVATORY</small></span></a><nav class="topnav" aria-label="Main"><a href="#overview">Overview</a><a href="#candidates">Candidates</a><a href="#sources">Sources</a><span class="cycle" id="cycle-label"></span></nav></div></header>
+<noscript><div class="wrap noscript">This interactive view needs JavaScript. Open the <a href="README.md">visual report</a> or download <a href="candidate_coverage.csv">candidate data</a>.</div></noscript>
+<main class="wrap" id="overview">
+<section class="hero"><div><div class="eyebrow">Evidence before interpretation</div><h1>A clear view of the<br>media pilot.</h1><p id="hero-caption">Explore candidate coverage, source availability, and the evidence needed for sentiment analysis.</p></div><div class="hero-actions"><a class="btn" href="candidate_coverage.csv" download>↓ Candidate data</a><a class="btn primary" id="analysis-link" href="#method">View analysis run ↗</a></div></section>
+<div class="status-strip"><div><span class="pill amber"><span class="dot"></span><span id="coverage-status">Partial coverage</span></span> <span class="muted">&nbsp;Saved data · retrospective research</span></div><div id="date-window" class="mono"></div></div>
+<section class="stats" aria-label="Pilot summary">
+<div class="stat"><div class="stat-top">CONGRESSIONAL REGISTRATIONS<span class="status-icon" aria-hidden="true">◎</span></div><div class="stat-value mono" id="stat-candidates">—</div><div class="stat-note">Selected FEC identities · not a certified ballot</div></div>
+<div class="stat"><div class="stat-top">SAVED NEWS URLS<span class="status-icon" aria-hidden="true">↗</span></div><div class="stat-value mono" id="stat-articles">—</div><div class="stat-note">Within the original collection window</div></div>
+<div class="stat"><div class="stat-top">REVIEWED LABELS<span class="status-icon" aria-hidden="true">✓</span></div><div class="stat-value mono" id="stat-reviews">—</div><div class="stat-note">Candidate-specific annotations</div></div>
+<div class="stat"><div class="stat-top">AVAILABLE SENTIMENT SCORES<span class="status-icon" aria-hidden="true">◷</span></div><div class="stat-value mono missing" id="stat-scores">—</div><div class="stat-note" id="scores-note">Missing values remain unavailable</div></div>
+</section>
+<div class="grid-main"><section class="panel" aria-labelledby="coverage-title"><div class="panel-head"><div><h2 id="coverage-title">Where coverage comes from</h2><p>Saved URL counts by source geography</p></div><div class="scope-tabs" role="group" aria-label="Coverage unit"><button type="button" data-unit="urls" aria-pressed="true">URLs</button><button type="button" data-unit="candidates" aria-pressed="false">Candidates</button></div></div><div class="bars" id="coverage-bars" role="img" aria-label="Coverage by source scope"></div><p class="chart-note" id="coverage-note"></p></section>
+<section class="panel" aria-labelledby="budget-title"><div class="panel-head"><div><h2 id="budget-title">A bounded collection</h2><p>One allowance across collection and retries</p></div><span class="pill green">No new requests</span></div><div class="budget-layout"><div class="ring"><svg viewBox="0 0 132 132" role="img" aria-label="Provider request budget"><circle cx="66" cy="66" r="55" fill="none" stroke="#e8efed" stroke-width="12"/><circle id="budget-arc" cx="66" cy="66" r="55" fill="none" stroke="#187e75" stroke-width="12" stroke-linecap="round"/></svg><div class="ring-center"><strong class="mono" id="budget-used">—</strong><span id="budget-limit"></span></div></div><div class="budget-detail"><div class="line"><span class="swatch"></span><span id="requests-used"></span></div><div class="line"><span class="swatch gray"></span><span id="requests-left"></span></div><div class="muted small" id="requests-analysis"></div></div></div><div class="quiet-note">Analysis reuses the saved checkpoint. This dashboard does not collect new articles.</div></section></div>
+<section class="panel" aria-labelledby="pipeline-title"><div class="panel-head"><div><h2 id="pipeline-title">From collection to usable evidence</h2><p>Each step has its own unit. Search results still need candidate verification and review.</p></div><span class="pill amber" id="pipeline-status">Awaiting sentiment review</span></div><div class="pipeline" id="pipeline"></div></section>
+<section class="panel" id="candidates" aria-labelledby="candidates-title"><div class="panel-head"><div><h2 id="candidates-title">Explore the candidates</h2><p>Select a name to inspect its evidence and missingness.</p></div><span class="pill">Registration discovery</span></div><div class="filters"><label class="search"><span class="eyebrow" hidden>Search candidates</span><input id="candidate-search" type="search" aria-label="Search candidates" placeholder="Search a name or FEC ID…"></label><select id="chamber-filter" aria-label="Filter by chamber"><option value="">All chambers</option><option value="H">House</option><option value="S">Senate</option></select><select id="state-filter" aria-label="Filter by state"><option value="">All states</option></select><select id="coverage-filter" aria-label="Filter by coverage"><option value="">All coverage</option><option value="observed">Has search-linked URLs</option><option value="missing">No saved URLs</option></select></div><div class="table-wrap"><table><thead><tr><th>Candidate / FEC identity</th><th>Race</th><th>Party</th><th>Search-linked URLs</th><th>Scope · N / S / M / L / ?</th><th>Sentiment score</th></tr></thead><tbody id="candidate-rows"></tbody></table></div><div id="candidate-empty" class="empty-state" hidden>No candidates match these filters. Clear a filter to see the roster.</div><div class="table-footer"><span id="candidate-count" aria-live="polite"></span><span>URL associations are unreviewed search matches, not verified mentions.</span></div><section class="candidate-detail" id="candidate-detail" hidden aria-label="Selected candidate evidence"></section></section>
+<section class="panel" id="sources" aria-labelledby="sources-title"><div class="panel-head"><div><h2 id="sources-title">Which sources were available?</h2><p>A source-directory match enables a search. It does not establish complete archive coverage.</p></div><div class="scope-tabs" role="group" aria-label="Source list"><button type="button" data-source-mode="attempted" aria-pressed="true">Looked up</button><button type="button" data-source-mode="all" aria-pressed="false">Relevant catalog</button></div></div><div class="source-list" id="source-list"></div><p class="sources-foot" id="source-note"></p></section>
+<section class="panel" id="method" aria-labelledby="method-title"><div class="panel-head"><div><h2 id="method-title">How to read this pilot</h2><p>Three distinctions keep the results interpretable.</p></div></div><div class="methods"><div><div class="method-index">01 / CANDIDATES</div><h3>Registrations need confirmation</h3><p>The roster contains sourced FEC registration identities. Ballot status, race membership and documented periods in office are separate research facts.</p></div><div><div class="method-index">02 / SENTIMENT</div><h3>Missing is not neutral</h3><p>Sentiment needs reviewed, candidate-specific evidence and sufficient coverage. A search match alone produces no sentiment score. News portrayal is separate from survey favorability.</p></div><div><div class="method-index">03 / TIME & SOURCES</div><h3>A fixed window, partial coverage</h3><p>This is a retrospective view of the original collection window. It is not a point-in-time forecast. Source partisanship carries no automatic penalty; no source rating is inferred here.</p></div></div><div class="evidence-links"><a id="collection-link" href="#">Original collection ↗</a><a href="data.json" download>Public metadata JSON ↓</a><a id="notebook-link" href="#">Open Colab ↗</a><a id="code-link" href="#">Source and audit ↗</a></div></section>
+<footer class="footer"><span>Midterm Sentiment Agents · Public metadata only · No article text or private reviews</span><span class="mono" id="revision"></span></footer>
+</main>
+<script id="dashboard-data" type="application/json">{
+  "articles": [
+    {
+      "article_id": "440f7cbc5aedf863a840bbde5fca5478f041106d52f3720b9e1999d07fe5dcd4",
+      "association_status": "unreviewed_search_association",
+      "candidate_ids": [
+        "S6AK00268",
+        "S6AK00284",
+        "S6AK00292",
+        "S6AK00318",
+        "S6AL00435",
+        "S6AL00534",
+        "S6AR00199",
+        "S8AK00066"
+      ],
+      "domain": "foxnews.com",
+      "historical_scope_verified": false,
+      "published_at": "2026-09-02T23:59:59+00:00",
+      "scope": "national",
+      "url": "https://www.foxnews.com/politics/dem-senate-nominee-changes-tune-ice-after-vowing-not-one-more-dime-agency"
+    },
+    {
+      "article_id": "d709a6163d8b73b385f45dc2c2efd9b543aa615a698aef5df5cb20c64a120738",
+      "association_status": "unreviewed_search_association",
+      "candidate_ids": [
+        "H2AK00143",
+        "H2AK00556",
+        "H2AK01083",
+        "H4AL02139",
+        "H4AR03081",
+        "H6AK01068",
+        "H6AK01092",
+        "H6AK01118"
+      ],
+      "domain": "foxnews.com",
+      "historical_scope_verified": false,
+      "published_at": "2026-09-16T23:59:59+00:00",
+      "scope": "national",
+      "url": "https://www.foxnews.com/politics/dems-boost-convicted-far-left-candidate-reigniting-tensions-inside-party"
+    },
+    {
+      "article_id": "0ff7dafb7b7cdb7517c171a2bd9d383f2ea618b0d8348da6fd5bbba93b7337d7",
+      "association_status": "unreviewed_search_association",
+      "candidate_ids": [
+        "S6AK00268",
+        "S6AK00284",
+        "S6AK00292",
+        "S6AK00318",
+        "S6AL00435",
+        "S6AL00534",
+        "S6AR00199",
+        "S8AK00066"
+      ],
+      "domain": "foxnews.com",
+      "historical_scope_verified": false,
+      "published_at": "2026-09-22T23:59:59+00:00",
+      "scope": "national",
+      "url": "https://www.foxnews.com/politics/red-state-dem-faces-fury-suggesting-illegal-aliens-should-replace-american-workers"
+    }
+  ],
+  "budget": {
+    "limit": 20,
+    "provider_requests_this_analysis": 0,
+    "remaining": 4,
+    "used": 16
+  },
+  "candidates": [
+    {
+      "article_count": 1,
+      "candidate_id": "H2AK00143",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Jim C Mcdermott",
+      "office": "H",
+      "party": "LIB",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H2AK00556",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "David Ambrose",
+      "office": "H",
+      "party": "N",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H2AK01083",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Nicholas Iii Begich",
+      "office": "H",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H4AL02139",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "02",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Hampton Harris",
+      "office": "H",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H4AR03081",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "03",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Bobby Wilson",
+      "office": "H",
+      "party": "LIB",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H6AK01068",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "John Brendan Williams",
+      "office": "H",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H6AK01092",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Bill Hill",
+      "office": "H",
+      "party": "IND",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 1,
+      "candidate_id": "H6AK01118",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 1,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Melanie A. Salazar",
+      "office": "H",
+      "party": "NON",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AK01134",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "David Ii Ambrose",
+      "office": "H",
+      "party": "UN",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AL04171",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "04",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Lee Jeh Cobb",
+      "office": "H",
+      "party": "W",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AL05277",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "05",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Crystal I Mrs Ball",
+      "office": "H",
+      "party": "NNE",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AL06143",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "06",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Keith Ross Pilkington",
+      "office": "H",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AL06176",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "06",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "William Karl Mr. Iv Puetz",
+      "office": "H",
+      "party": "IND",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AR02278",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "02",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Chase Mcdowell",
+      "office": "H",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AR02294",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "02",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Zackary Blake Huffman",
+      "office": "H",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 0,
+      "candidate_id": "H6AR03144",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 0,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "03",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_article_metadata_in_original_window",
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Christopher John Mr. Ii Hocevar",
+      "office": "H",
+      "party": "IND",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AK00268",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Dustin Thomas House Darden",
+      "office": "S",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AK00284",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Carol Hafner",
+      "office": "S",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AK00292",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Heather G Mcelwain",
+      "office": "S",
+      "party": "LP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AK00318",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Reece Roberts",
+      "office": "S",
+      "party": "NON",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AL00435",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Kyle Sweetser",
+      "office": "S",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AL00534",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AL"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Gavin Solomon",
+      "office": "S",
+      "party": "REP",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AL"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S6AR00199",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "00",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AR"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Hallie Shoffner",
+      "office": "S",
+      "party": "DEM",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AR"
+    },
+    {
+      "article_count": 2,
+      "candidate_id": "S8AK00066",
+      "coverage": {
+        "local": 0,
+        "metro": 0,
+        "national": 2,
+        "state": 0,
+        "unknown": 0
+      },
+      "cycle": 2026,
+      "district": "",
+      "election_id": "",
+      "feature_provenance": {
+        "as_of": "2026-10-06T23:59:59+00:00",
+        "cycle": 2026,
+        "lookback_days": 731,
+        "lookback_start": "2024-10-05T23:59:59+00:00",
+        "metadata_window_as_of": "2026-10-06",
+        "metadata_window_start": "2026-09-01",
+        "mode": "retrospective",
+        "same_as_metadata_window": false,
+        "state": "AK"
+      },
+      "features": {
+        "media_recency_score": null,
+        "national_score": null,
+        "subnational_score": null
+      },
+      "known_at": "2026-10-07T20:16:44+00:00",
+      "missingness": [
+        "no_reviewed_candidate_sentiment",
+        "sentiment_unavailable"
+      ],
+      "name": "Scott A. Kohlhaas",
+      "office": "S",
+      "party": "LIB",
+      "reviewed_annotations": 0,
+      "roster_status": "registry_only",
+      "source_url": "https://www.fec.gov/files/bulk-downloads/2026/cn26.zip",
+      "stage": "",
+      "state": "AK"
+    }
+  ],
+  "checkpoint_counts": {
+    "article_urls": 3,
+    "candidate_article_links": 24,
+    "reviewed_annotations": 0
+  },
+  "collection": {
+    "blocked_jobs": 0,
+    "failed_jobs": 0,
+    "processed_hits": 3,
+    "processed_jobs": 6
+  },
+  "count_scope": "Summary and scope counts include only selected-cohort search associations with public publisher URLs and publication dates in the original collection window; checkpoint_counts describes the whole saved database.",
+  "coverage": {
+    "local": 0,
+    "metro": 0,
+    "national": 3,
+    "state": 0,
+    "unknown": 0
+  },
+  "coverage_note": "Candidate coverage counts describe source geography for saved search associations; they do not establish a verified mention, candidate-state relevance, or district readership. Feature lookback windows are reported separately from metadata counts.",
+  "current_status": "analyzed_partial",
+  "dataset_kind": "real",
+  "original_status": "blocked",
+  "provenance": {
+    "analysis_run_id": 38097810150,
+    "code_revision": "b8ace01b1787850a6ff3eb898075457aa8330f20",
+    "collection_code_revision": "8041f94b9ac8b803e228c86d3f89b2461c479215",
+    "source_repository": "meteor21/Simulations",
+    "source_run_id": 37680664034
+  },
+  "schema_version": 1,
+  "sources": [
+    {
+      "domain": "alabamareflector.com",
+      "evidence_url": "https://statesnewsroom.com/newsrooms/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "b98c530cc243f393ddb848821c3b80b996ad1a3de7cd2a8ce031c7af99ea3cec",
+      "resolution_status": "not_found",
+      "scope": "state",
+      "source_id": null,
+      "states": [
+        "AL"
+      ],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "alaskabeacon.com",
+      "evidence_url": "https://statesnewsroom.com/newsrooms/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "a052291579dd5284ed37609e0e0dc617b2d3865f4d1ce81b75c5258b52bcc475",
+      "resolution_status": "not_found",
+      "scope": "state",
+      "source_id": null,
+      "states": [
+        "AK"
+      ],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "apnews.com",
+      "evidence_url": "https://www.allsides.com/news-source/associated-press-media-bias",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "7791c9d5bfcb02df97d2264b1bbc2110c27d5e9116ddd83a8213a1d258b7d75b",
+      "resolution_status": "exact_root_homepage_match",
+      "scope": "national",
+      "source_id": 106145,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "arkansasadvocate.com",
+      "evidence_url": "https://statesnewsroom.com/newsrooms/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "df7583e4e77b7ee5e24e1ac555c6d4bb5e6970247b27973ad91e62648ac20417",
+      "resolution_status": "not_found",
+      "scope": "state",
+      "source_id": null,
+      "states": [
+        "AR"
+      ],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "cnn.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "d3b0a89641d1f9cd65dcfacc970117210a13fee8daecc7d1769c72c29c1a8400",
+      "resolution_status": "exact_root_homepage_match",
+      "scope": "national",
+      "source_id": 1095,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "foxnews.com",
+      "evidence_url": "https://www.allsides.com/news-source/fox-news-media-bias",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "83c46be1a6b09522a727c709995f5c32e3ad11fcd5e95a4eebbcb69614edd228",
+      "resolution_status": "exact_root_homepage_match",
+      "scope": "national",
+      "source_id": 1092,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "nationalreview.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "67f5dae70b98e6673380c6960bbf65404cf2d382f2edbcb3b4208f59741cdac1",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "npr.org",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "06d7136fd98b5a3f78579af406105aaadc5ae75de4f69d6766809f46666c50d8",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "nytimes.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "edf7b0b9fe67c77ea88ba02af3881822e10886c1293419909c07e0047f8d73aa",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "politico.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "1dc0aa5dc28f2025dca4d1902bf3dfd4cb18f52a8ebc9f6bb3e32129e038df9d",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "reuters.com",
+      "evidence_url": "https://www.allsides.com/news-source/reuters-media-bias",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "936cd8e4424c3c6a539174b7ce2fb7c2172eb48b4db7a5db086df101dc1d133c",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "stateline.org",
+      "evidence_url": "https://statesnewsroom.com/newsrooms/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "39775d9c456a6510889ba8ea0250a00869cbd03a09b5d26f6af237117013f210",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "thehill.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "febce8dcdbeb35afb1312fd027501cb2467c388698ed6b36af62c21e65818d14",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "washingtonexaminer.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "01c354f7464322f6e56f7fb7eb92a0f1d358d2e53d2fd8c3fe845b314935bf68",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    },
+    {
+      "domain": "wsj.com",
+      "evidence_url": "https://www.allsides.com/media-bias/ratings/",
+      "geography": {},
+      "observed_at": "2026-10-06T23:59:59+00:00",
+      "profile_id": "67a6d2189c9613996eecc2edca321d93848e86974ce4d676bddf4881a3e80eb7",
+      "resolution_status": "not_requested",
+      "scope": "national",
+      "source_id": null,
+      "states": [],
+      "url_prefix": "",
+      "valid_from": "2026-10-06T23:59:59+00:00",
+      "valid_to": null
+    }
+  ],
+  "summary": {
+    "article_urls": 3,
+    "candidate_article_links": 24,
+    "candidates_with_scores": 0,
+    "retrospective_scope_urls": 3,
+    "reviewed_annotations": 0,
+    "selected_candidates": 24
+  },
+  "warnings": {
+    "current": [
+      "No reviewed candidate-specific sentiment annotations; scores remain missing",
+      "Source coverage remains incomplete; this analysis does not fill missing coverage"
+    ],
+    "original": [
+      "Source panel incomplete; inspect source_resolution and collection_plan"
+    ],
+    "research": [
+      "Media portrayal is not representative public opinion; survey favorability remains separate.",
+      "Registrations are not verified contestants; search associations are not verified candidate mentions.",
+      "Missing sentiment is unavailable, not neutral. Partisanship carries no sentiment-weight penalty.",
+      "Retrospective reconstruction is not a point-in-time forecast; source coverage is incomplete.",
+      "Public export contains article metadata only; original publisher text and review evidence are omitted."
+    ]
+  },
+  "window": {
+    "as_of": "2026-10-06",
+    "cycle": 2026,
+    "mode": "retrospective",
+    "start": "2026-09-01"
+  }
+}</script>
+<script>
+'use strict';
+const D=JSON.parse(document.getElementById('dashboard-data').textContent);
+const scopes=['national','state','metro','local','unknown'];
+const colors={national:'#187e75',state:'#619de3',metro:'#9775ca',local:'#d08d38',unknown:'#8c959e'};
+const $=id=>document.getElementById(id);
+const text=(id,value)=>{$(id).textContent=String(value)};
+const el=(tag,cls,value)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(value!==undefined)node.textContent=String(value);return node};
+const pretty=value=>value ? value[0].toUpperCase()+value.slice(1) : 'Unknown';
+const date=value=>value ? new Date(value.slice(0,10)+'T12:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}) : 'Not documented';
+const link=(label,url,cls)=>{const a=el('a',cls,label);if(url&&/^https?:\/\//.test(url)){a.href=url;a.target='_blank';a.rel='noopener noreferrer'}return a};
+const repo='https://github.com/'+D.provenance.source_repository;
+text('cycle-label',D.window.cycle+' RESEARCH PILOT');
+text('hero-caption',D.summary.selected_candidates+' congressional registrations. One bounded collection window. Explore what was collected, what is missing, and what still needs review.');
+text('date-window',date(D.window.start)+' — '+date(D.window.as_of));
+text('stat-candidates',D.summary.selected_candidates);text('stat-articles',D.summary.article_urls);text('stat-reviews',D.summary.reviewed_annotations);text('stat-scores',D.summary.candidates_with_scores+' / '+D.summary.selected_candidates);
+text('scores-note',D.summary.reviewed_annotations===0?'No reviewed labels · scores remain missing':'Reviewed features where coverage is sufficient');
+if(D.summary.reviewed_annotations>0)text('pipeline-status','Coverage and review status');
+text('budget-used',D.budget.used);text('budget-limit','of '+D.budget.limit+' requests');
+text('requests-used',D.budget.used+' requests used');text('requests-left',D.budget.remaining+' remaining');text('requests-analysis',D.budget.provider_requests_this_analysis+' used by this analysis');
+const circumference=2*Math.PI*55;$('budget-arc').setAttribute('stroke-dasharray',circumference);$('budget-arc').setAttribute('stroke-dashoffset',circumference*(1-D.budget.used/D.budget.limit));
+$('analysis-link').href=repo+'/actions/runs/'+D.provenance.analysis_run_id;$('collection-link').href=repo+'/actions/runs/'+D.provenance.source_run_id;$('code-link').href=repo+'/tree/'+D.provenance.code_revision;
+$('notebook-link').href='https://colab.research.google.com/github/'+D.provenance.source_repository+'/blob/main/notebooks/Midterm_Sentiment_Agents_Colab.ipynb';text('revision','Analysis '+D.provenance.analysis_run_id+' · '+D.provenance.code_revision.slice(0,7));
+function renderCoverage(unit='urls'){
+ const values=unit==='urls'?D.coverage:Object.fromEntries(scopes.map(s=>[s,D.candidates.filter(c=>c.coverage[s]>0).length]));
+ const max=Math.max(1,...Object.values(values));$('coverage-bars').replaceChildren();
+ scopes.forEach(scope=>{const row=el('div','bar-row');row.append(el('span','',pretty(scope)));const track=el('div','bar-track');const fill=el('div','bar-fill');fill.style.width=(100*values[scope]/max)+'%';fill.style.background=colors[scope];track.append(fill);if(!values[scope])track.append(el('span','bar-empty','No observed '+(unit==='urls'?'URLs':'candidates')));row.append(track,el('strong','mono',values[scope]));$('coverage-bars').append(row)});
+ $('coverage-bars').setAttribute('aria-label',scopes.map(s=>s+': '+values[s]).join('; '));
+ text('coverage-note',(unit==='urls'?'Unique saved URLs in the selected cohort and original window. Zero URLs is a coverage gap; source geography does not establish candidate-state or district relevance.':'Candidates with at least one search-linked URL in each source scope. One candidate can appear in multiple scopes; these are unreviewed associations.')+(D.summary.retrospective_scope_urls?' Geography for '+D.summary.retrospective_scope_urls+' URL(s) uses profiles whose historical applicability is unverified.':''));
+}
+document.querySelectorAll('[data-unit]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-unit]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));renderCoverage(button.dataset.unit)}));renderCoverage();
+const attempted=D.sources.filter(s=>s.resolution_status!=='not_requested');const resolved=new Set(attempted.filter(s=>s.resolution_status==='exact_root_homepage_match').map(s=>s.domain)).size;
+[['01 · Directory',resolved,'sources resolved',false],['02 · Search',D.collection.processed_jobs??'—','completed jobs',false],['03 · Collection',D.summary.article_urls,'saved news URLs',false],['04 · Review',D.summary.reviewed_annotations,'reviewed annotations',D.summary.reviewed_annotations===0],['05 · Features',D.summary.candidates_with_scores,'candidates with a score',D.summary.candidates_with_scores<D.summary.selected_candidates]].forEach(([label,n,caption,pending])=>{const stage=el('div','stage'+(pending?' pending':''));stage.append(el('div','step',label),el('strong','mono',n),el('p','',caption));$('pipeline').append(stage)});
+const states=[...new Set(D.candidates.map(c=>c.state))].sort();states.forEach(state=>{const option=el('option','',state);option.value=state;$('state-filter').append(option)});
+function scoreLabel(candidate){const score=candidate.features.media_recency_score;return score!==null&&score!==undefined?Number(score).toFixed(1):candidate.reviewed_annotations===0?'Awaiting review':'Insufficient coverage'}
+function renderCandidates(){
+ const query=$('candidate-search').value.trim().toLowerCase(),chamber=$('chamber-filter').value,state=$('state-filter').value,coverage=$('coverage-filter').value;
+ const selected=D.candidates.filter(c=>(!query||(c.name+' '+c.candidate_id).toLowerCase().includes(query))&&(!chamber||c.office===chamber)&&(!state||c.state===state)&&(!coverage||(coverage==='observed'?c.article_count>0:c.article_count===0)));
+ $('candidate-rows').replaceChildren();
+ selected.forEach(c=>{const row=el('tr');row.dataset.candidateRow=c.candidate_id;const nameCell=el('td');const button=el('button','candidate-open');button.type='button';button.setAttribute('aria-label','Inspect '+c.name);button.append(el('span','candidate-name',c.name),el('span','candidate-id mono',c.candidate_id));button.addEventListener('click',()=>showCandidate(c));nameCell.append(button);row.append(nameCell,el('td','',c.state+' · '+(c.office==='H'?'House '+(c.district||'at-large'):'Senate')),el('td','',c.party||'Unknown'),el('td','mono',c.article_count));const scopeCell=el('td');const cells=el('div','scope-cells');scopes.forEach(s=>{const count=el('span','scope-count'+(c.coverage[s]?' observed':''),c.coverage[s]);count.title=pretty(s)+': '+c.coverage[s]+' search-linked URLs';cells.append(count)});scopeCell.append(cells);row.append(scopeCell,el('td',c.features.media_recency_score===null?'score-missing':'mono',scoreLabel(c)));$('candidate-rows').append(row)});
+ text('candidate-count','Showing '+selected.length+' of '+D.candidates.length+' registrations');$('candidate-empty').hidden=selected.length>0;$('candidate-detail').hidden=true;
+}
+['candidate-search','chamber-filter','state-filter','coverage-filter'].forEach(id=>$(id).addEventListener(id==='candidate-search'?'input':'change',renderCandidates));renderCandidates();
+const missingLabels={no_article_metadata_in_original_window:'No saved article metadata in this collection window.',no_reviewed_candidate_sentiment:'No reviewed candidate-specific sentiment labels.',no_matching_reviewed_snapshot:'No matching reviewed feature snapshot at the cutoff.',feature_lookback_provenance_unavailable:'The feature lookback window is not documented.',sentiment_unavailable:'A usable sentiment score is unavailable.'};
+function showCandidate(c){
+ const box=$('candidate-detail');box.replaceChildren();box.hidden=false;const top=el('div','detail-top');const title=el('div');title.append(el('h3','',c.name),el('p','details-meta',c.candidate_id+' · '+c.roster_status+' · known '+date(c.known_at)));const close=el('button','close','×');close.type='button';close.setAttribute('aria-label','Close candidate evidence');close.addEventListener('click',()=>{box.hidden=true;document.querySelector('[data-candidate-row="'+CSS.escape(c.candidate_id)+'"] button')?.focus()});top.append(title,close);box.append(top);const grid=el('div','detail-grid');const left=el('div');left.append(el('strong','',scoreLabel(c)));const list=el('ul');c.missingness.forEach(reason=>list.append(el('li','',missingLabels[reason]||'Additional coverage limitation')));if(!c.missingness.length)list.append(el('li','','Scores use available reviewed evidence; coverage limits still apply.'));left.append(list);if(c.source_url)left.append(link('Registration provenance ↗',c.source_url));const right=el('div');right.append(el('strong','','Search-linked publisher URLs'));const articles=D.articles.filter(a=>a.candidate_ids.includes(c.candidate_id));if(!articles.length)right.append(el('p','muted','No saved URLs for this identity in the original window.'));articles.forEach(a=>{const p=el('p');p.append(link(a.domain+' · '+date(a.published_at)+' ↗',a.url));right.append(p)});right.append(el('p','details-meta','Links reflect search associations. Candidate mentions still require verification.'));grid.append(left,right);box.append(grid);
+ const provenance=c.feature_provenance;
+ if(provenance)box.append(el('p','details-meta','Feature lookback: '+provenance.lookback_days+' days ('+date(provenance.lookback_start)+' to '+date(provenance.as_of)+'). Metadata counts above use only the original collection window.'));
+ if(articles.some(a=>!a.historical_scope_verified))box.append(el('p','details-meta','Some article geography uses source profiles whose historical applicability is unverified.'));
+}
+const resolutionLabels={exact_root_homepage_match:'Source matched',not_found:'No directory match',not_requested:'Not looked up',directory_incomplete:'Directory incomplete',ambiguous:'Ambiguous match',budget_stop:'Budget stopped lookup',error:'Lookup error',access_blocked:'Access blocked'};
+function renderSources(mode='attempted'){
+ const sources=D.sources.filter(s=>mode==='all'||s.resolution_status!=='not_requested');$('source-list').replaceChildren();
+ sources.forEach(s=>{const card=el('article','source-card');card.append(el('div','domain',s.domain),el('div','source-meta',pretty(s.scope)+(s.states.length?' · '+s.states.join(', '):'')));card.append(el('span','pill '+(s.resolution_status==='exact_root_homepage_match'?'green':s.resolution_status==='not_requested'?'':'amber'),resolutionLabels[s.resolution_status]||'Unknown'));const detail=el('details');detail.append(el('summary','','Geography provenance'));detail.append(el('p','','Observed '+date(s.observed_at)),el('p','','Applicable from '+date(s.valid_from)+(s.valid_to?' through '+date(s.valid_to):'; no end date recorded')));if(s.evidence_url)detail.append(link('Source evidence ↗',s.evidence_url,'source-evidence'));if(s.source_id!==null)detail.append(el('p','mono','Media Cloud ID '+s.source_id));card.append(detail);$('source-list').append(card)});
+ text('source-note',mode==='attempted'?resolved+' matched domains from '+new Set(attempted.map(s=>s.domain)).size+' attempted lookups. An unmatched source remains unknown coverage; it may still publish campaign news.':sources.length+' relevant profile records, including sources outside this bounded lookup. Catalog inclusion does not mean an outlet was searched.');
+}
+document.querySelectorAll('[data-source-mode]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-source-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));renderSources(button.dataset.sourceMode)}));renderSources();
+window.__dashboardReady=true;
+</script>
+</body></html>
