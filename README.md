@@ -4,7 +4,7 @@
 
 Original window: **2026-09-01 through 2026-10-06**. Retrospective research; coverage is partial.
 
-[Open analysis run](https://github.com/meteor21/Simulations/actions/runs/38097810150) · [Download interactive dashboard](https://raw.githubusercontent.com/meteor21/Simulations/analysis-dashboard/index.html) · [Candidate CSV](candidate_coverage.csv) · [Public metadata](data.json)
+[Open analysis run](https://github.com/meteor21/Simulations/actions/runs/38098191825) · [Download interactive dashboard](https://raw.githubusercontent.com/meteor21/Simulations/analysis-dashboard/index.html) · [Candidate CSV](candidate_coverage.csv) · [Public metadata](data.json)
 
 The HTML dashboard is self-contained: save `index.html` and open it in a browser to search candidates, filter coverage and inspect sources.
 
@@ -74,4 +74,4 @@ Media portrayal is not representative public opinion. Survey favorability remain
 
 Only selected-cohort public metadata is published here. Article bodies, titles, private review evidence, credentials and the database are excluded. Any available sentiment feature has its own documented lookback window in the public JSON; this is separate from the collection-window metadata counts.
 
-[Original collection](https://github.com/meteor21/Simulations/actions/runs/37680664034) · [Analysis source](https://github.com/meteor21/Simulations/tree/b8ace01b1787850a6ff3eb898075457aa8330f20) · [Colab notebook](https://colab.research.google.com/github/meteor21/Simulations/blob/main/notebooks/Midterm_Sentiment_Agents_Colab.ipynb)
+[Original collection](https://github.com/meteor21/Simulations/actions/runs/37680664034) · [Analysis source](https://github.com/meteor21/Simulations/tree/04ecbaf199812cb9cfa9116162b6e24b3bdcb8fa) · [Colab notebook](https://colab.research.google.com/github/meteor21/Simulations/blob/main/notebooks/Midterm_Sentiment_Agents_Colab.ipynb)
