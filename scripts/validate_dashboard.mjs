@@ -72,6 +72,7 @@ try{
  check('search selects the intended identity',await evaluate('Array.from(document.querySelectorAll("[data-candidate-row]")).map(x=>x.dataset.candidateRow)'),[first.candidate_id]);
  await evaluate('document.querySelector(".candidate-open").click()');
  check('candidate evidence opens',await evaluate('!document.querySelector("#candidate-detail").hidden'),true);
+ check('opened candidate evidence is visible',await evaluate('(()=>{const r=document.querySelector("#candidate-detail").getBoundingClientRect();return r.top>=0&&r.top<window.innerHeight})()'),true);
  check('candidate detail preserves review warning',await evaluate('document.querySelector("#candidate-detail").textContent.includes("search associations")'),true);
  await evaluate('document.querySelector("#candidate-search").value="NONEXISTENT-CANDIDATE-XYZ";document.querySelector("#candidate-search").dispatchEvent(new Event("input"))');
  check('empty filters show an explicit empty state',await evaluate('!document.querySelector("#candidate-empty").hidden'),true);
@@ -87,6 +88,7 @@ try{
  check('source lookup view excludes unrequested profiles',await evaluate('document.querySelectorAll(".source-card").length'),data.sources.filter(s=>s.resolution_status!=='not_requested').length);
  check('desktop has no document overflow',await evaluate('document.documentElement.scrollWidth<=window.innerWidth'),true);
  const screenshot=async name=>{if(args['--screenshots']){await mkdir(args['--screenshots'],{recursive:true});const result=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await writeFile(path.join(args['--screenshots'],name+'.png'),Buffer.from(result.data,'base64'))}};
+ await evaluate('window.scrollTo({top:0,behavior:"instant"})');
  await screenshot('desktop');
  await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
  await evaluate('window.scrollTo(0,0)');await new Promise(resolve=>setTimeout(resolve,150));

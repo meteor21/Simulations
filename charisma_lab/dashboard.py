@@ -102,6 +102,7 @@ function showCandidate(c){
  const provenance=c.feature_provenance;
  if(provenance)box.append(el('p','details-meta','Feature lookback: '+provenance.lookback_days+' days ('+date(provenance.lookback_start)+' to '+date(provenance.as_of)+'). Metadata counts above use only the original collection window.'));
  if(articles.some(a=>!a.historical_scope_verified))box.append(el('p','details-meta','Some article geography uses source profiles whose historical applicability is unverified.'));
+ box.tabIndex=-1;box.focus({preventScroll:true});box.scrollIntoView({block:'nearest',behavior:'instant'});
 }
 const resolutionLabels={exact_root_homepage_match:'Source matched',not_found:'No directory match',not_requested:'Not looked up',directory_incomplete:'Directory incomplete',ambiguous:'Ambiguous match',budget_stop:'Budget stopped lookup',error:'Lookup error',access_blocked:'Access blocked'};
 function renderSources(mode='attempted'){
