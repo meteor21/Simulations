@@ -1,0 +1,6 @@
+{
+  "format": "midterm-dashboard-request-v1",
+  "request_id": "publish-saved-pilot-visualizations-448216b",
+  "source_run_id": "37680664034",
+  "reason": "User requested running and deploying the real analysis with visualizations on GitHub. Reuse the saved checkpoint and publish public metadata only; make zero new provider requests."
+}
